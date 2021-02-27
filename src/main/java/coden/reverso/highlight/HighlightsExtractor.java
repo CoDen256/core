@@ -1,17 +1,18 @@
 package coden.reverso.highlight;
 
-import org.springframework.stereotype.Component;
-
 import java.util.regex.Pattern;
 
-@Component
 public class HighlightsExtractor {
 
     public static final String HIGHLIGHT_TAG_OPEN = "<em>";
     public static final String HIGHLIGHT_TAG_CLOSE = "</em>";
     public static final Pattern LINKS_PATTERN = Pattern.compile("</?a[^>]*>");
-    
-    public CuttableText extract(String text){
+
+    private HighlightsExtractor(){
+
+    }
+
+    public static CuttableText extract(String text){
         CuttableText innerText = new CuttableText(text);
 
         removeLinks(innerText);
@@ -22,16 +23,16 @@ public class HighlightsExtractor {
         return innerText;
     }
     
-    private void cutNextHighlight(CuttableText innerText) {
+    private static void cutNextHighlight(CuttableText innerText) {
         innerText.cut(HIGHLIGHT_TAG_OPEN);
         innerText.cut(HIGHLIGHT_TAG_CLOSE);
     }
 
-    private void removeLinks(CuttableText innerText) {
+    private static void removeLinks(CuttableText innerText) {
         innerText.cutAll(LINKS_PATTERN.pattern());
     }
 
-    private boolean isHighlighted(String sentence){
+    private static boolean isHighlighted(String sentence){
         return sentence.contains(HIGHLIGHT_TAG_OPEN) || sentence.contains(HIGHLIGHT_TAG_CLOSE);
     }
 

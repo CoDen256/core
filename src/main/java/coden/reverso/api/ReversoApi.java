@@ -1,5 +1,7 @@
 package coden.reverso.api;
 
+import coden.reverso.context.ReversoContextClient;
+import coden.reverso.translation.ReversoTranslationClient;
 import coden.smarttranslate.controllers.reverso.context.ReversoContextProvider;
 import coden.smarttranslate.controllers.reverso.context.ReversoContextSentence;
 import coden.smarttranslate.controllers.reverso.context.ReversoContextTranslation;
@@ -18,12 +20,10 @@ import java.util.stream.Collectors;
 
 @Primary
 @Component
-public class ReversoApi implements ReversoContextProvider, ReversoTranslationProvider {
+public class ReversoApi implements ReversoContextClient, ReversoTranslationClient {
 
     private static final String CONTEXT_API = "https://context.reverso.net/bst-query-service";
     private static final String TRANSLATE_API = "https://api.reverso.net/translate/v1/translation";
-    private final ReversoLanguageResolver ctxResolver;
-    private final ReversoLanguageResolver transResolver;
     private final WebClient contextClient;
     private final WebClient transClient;
     private final HighlightsExtractor extractor;

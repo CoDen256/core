@@ -4,6 +4,7 @@ import coden.reverso.context.ReversoContext;
 import coden.reverso.context.ReversoContextClient;
 import coden.reverso.context.ReversoContextSentence;
 import coden.reverso.highlight.CuttableText;
+import coden.reverso.highlight.HighlightsExtractor;
 import coden.reverso.language.ReversoLanguage;
 import coden.reverso.website.ReversoWebsite;
 import org.jsoup.Jsoup;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class ReversoCrawler implements ReversoContextClient {
+
 
     @Override
     public List<ReversoContext> getContexts(ReversoLanguage source, ReversoLanguage target, String phrase) throws Exception {
@@ -49,7 +51,7 @@ public class ReversoCrawler implements ReversoContextClient {
     }
 
     private ReversoContextSentence extractHighlights(String html) {
-        CuttableText extracted = extractor.extract(html);
+        CuttableText extracted = HighlightsExtractor.extract(html);
         return ReversoContextSentence.fromPairHighlightPoints(extracted.getText(), extracted.getCutPoints());
     }
 
