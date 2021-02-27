@@ -1,1 +1,2 @@
 rootProject.name = 'multitran-api'
+include('lib')
