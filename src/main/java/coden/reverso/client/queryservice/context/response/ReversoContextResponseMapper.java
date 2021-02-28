@@ -21,6 +21,6 @@ public class ReversoContextResponseMapper {
 
     private ReversoContextSentence createContextSentence(String text) {
         CuttableText extracted = HighlightsExtractor.extract(text);
-        return ReversoContextSentence.fromPairHighlightPoints(extracted.getText(), extracted.getCutPoints());
+        return ReversoContextSentence.fromPairHighlights(extracted.getText(), extracted.getCutPoints());
     }
 }

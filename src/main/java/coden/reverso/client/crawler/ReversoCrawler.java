@@ -50,6 +50,6 @@ public class ReversoCrawler implements ReversoContextClient {
 
     private ReversoContextSentence extractHighlights(String html) {
         CuttableText extracted = HighlightsExtractor.extract(html);
-        return ReversoContextSentence.fromPairHighlightPoints(extracted.getText(), extracted.getCutPoints());
+        return ReversoContextSentence.fromPairHighlights(extracted.getText(), extracted.getCutPoints());
     }
 }
