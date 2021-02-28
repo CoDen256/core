@@ -4,13 +4,12 @@ import coden.reverso.data.context.ReversoContext;
 import coden.reverso.data.context.ReversoContextSentence;
 import coden.reverso.highlight.CuttableText;
 import coden.reverso.highlight.HighlightsExtractor;
-import coden.reverso.language.ReversoLanguage;
 
 import java.util.stream.Stream;
 
 public class ReversoContextResponseMapper {
 
-    public Stream<ReversoContext> map(ReversoContextResponse response){
+    public Stream<ReversoContext> map(ReversoContextResponse response) {
         return response.getList().stream().map(this::mapToReversoContext);
     }
 
@@ -20,7 +19,7 @@ public class ReversoContextResponseMapper {
         return new ReversoContext(sourceContext, targetContext);
     }
 
-    private ReversoContextSentence createContextSentence(String text){
+    private ReversoContextSentence createContextSentence(String text) {
         CuttableText extracted = HighlightsExtractor.extract(text);
         return ReversoContextSentence.fromPairHighlightPoints(extracted.getText(), extracted.getCutPoints());
     }

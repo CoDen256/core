@@ -16,7 +16,8 @@ public class ReversoTranslationResponse {
     private ReversoTranslationContextResults contextResults;
 
 
-    private ReversoTranslationResponse() { }
+    private ReversoTranslationResponse() {
+    }
 
     public List<String> getInput() {
         return input;

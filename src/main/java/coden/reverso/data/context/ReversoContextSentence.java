@@ -22,7 +22,7 @@ public class ReversoContextSentence {
         return highlights;
     }
 
-    public static ReversoContextSentence fromPairHighlightPoints(String sentence, List<Integer> highlightPoints){
+    public static ReversoContextSentence fromPairHighlightPoints(String sentence, List<Integer> highlightPoints) {
         List<ReversoContextHighlight> highlightList = IntStream.range(0, highlightPoints.size())
                 .filter(n -> n % 2 == 0)
                 .mapToObj(n -> new ReversoContextHighlight(highlightPoints.get(n), highlightPoints.get(n + 1)))

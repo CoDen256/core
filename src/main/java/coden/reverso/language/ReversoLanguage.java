@@ -10,7 +10,7 @@ public enum ReversoLanguage {
     private final String contextApiStandard;
     private final String translationApiStandard;
 
-    ReversoLanguage(String urlStandard, String contextApiStandard, String translationApiStandard){
+    ReversoLanguage(String urlStandard, String contextApiStandard, String translationApiStandard) {
         this.urlStandard = urlStandard;
         this.contextApiStandard = contextApiStandard;
         this.translationApiStandard = translationApiStandard;

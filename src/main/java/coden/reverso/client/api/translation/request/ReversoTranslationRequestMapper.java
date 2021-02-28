@@ -1,7 +1,5 @@
 package coden.reverso.client.api.translation.request;
 
-import coden.reverso.client.api.translation.request.ReversoTranslationOptions;
-import coden.reverso.client.api.translation.request.ReversoTranslationRequest;
 import coden.reverso.language.ReversoLanguage;
 
 public class ReversoTranslationRequestMapper {

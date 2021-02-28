@@ -9,8 +9,7 @@ import coden.reverso.language.ReversoLanguage;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ReversoQueryService implements ReversoContextClient {
 
@@ -25,12 +24,12 @@ public class ReversoQueryService implements ReversoContextClient {
     }
 
     @Override
-    public List<ReversoContext> getContexts(ReversoLanguage source, ReversoLanguage target, String phrase) throws Exception {
+    public Stream<ReversoContext> getContexts(ReversoLanguage source, ReversoLanguage target, String phrase) throws Exception {
         ReversoContextResponse response = webClient.post()
                 .bodyValue(reversoContextRequestMapper.map(source, target, phrase))
                 .retrieve()
                 .bodyToMono(ReversoContextResponse.class)
                 .block();
-        return reversoContextResponseMapper.map(response).collect(Collectors.toList());
+        return reversoContextResponseMapper.map(response);
     }
 }

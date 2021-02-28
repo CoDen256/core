@@ -2,8 +2,8 @@ package coden.reverso.data.translation;
 
 import coden.reverso.language.ReversoLanguage;
 
-import java.util.List;
+import java.util.stream.Stream;
 
 public interface ReversoTranslationClient {
-    List<ReversoTranslation> getTranslations(ReversoLanguage source, ReversoLanguage target, String phrase) throws Exception;
+    Stream<ReversoTranslation> getTranslations(ReversoLanguage source, ReversoLanguage target, String phrase) throws Exception;
 }

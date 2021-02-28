@@ -11,6 +11,7 @@ public class CuttableText {
         this.text = originalString;
 
     }
+
     public String getText() {
         return text;
     }

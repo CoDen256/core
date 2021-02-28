@@ -12,7 +12,7 @@ public class ReversoUrls {
     public static final String QUERY_SERVICE_API = "https://context.reverso.net/bst-query-service";
     public static final String TRANSLATE_API = "https://api.reverso.net/translate/v1/translation";
 
-    private ReversoUrls(){
+    private ReversoUrls() {
     }
 
     public static String getContextUrl(ReversoLanguage source, ReversoLanguage target, String phrase) {
