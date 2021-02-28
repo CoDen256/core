@@ -1,15 +1,15 @@
-package coden.reverso.api;
+package coden.reverso.client.api;
 
-import coden.reverso.context.ReversoContextClient;
-import coden.reverso.translation.ReversoTranslationClient;
-import coden.smarttranslate.controllers.reverso.context.ReversoContextProvider;
-import coden.smarttranslate.controllers.reverso.context.ReversoContextSentence;
-import coden.smarttranslate.controllers.reverso.context.ReversoContextTranslation;
-import coden.smarttranslate.controllers.reverso.highlight.CuttableText;
-import coden.smarttranslate.controllers.reverso.highlight.HighlightsExtractor;
-import coden.smarttranslate.controllers.reverso.language.ReversoLanguageResolver;
-import coden.smarttranslate.controllers.reverso.translation.ReversoTranslationProvider;
-import coden.smarttranslate.core.Language;
+import coden.reverso.client.api.context.ReversoContextRequest;
+import coden.reverso.client.api.context.ReversoContextResponse;
+import coden.reverso.data.context.ReversoContext;
+import coden.reverso.data.context.ReversoContextClient;
+import coden.reverso.data.context.ReversoContextSentence;
+import coden.reverso.data.translation.ReversoTranslation;
+import coden.reverso.data.translation.ReversoTranslationClient;
+import coden.reverso.highlight.CuttableText;
+import coden.reverso.highlight.HighlightsExtractor;
+import coden.reverso.language.ReversoLanguage;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
@@ -22,25 +22,18 @@ import java.util.stream.Collectors;
 @Component
 public class ReversoApi implements ReversoContextClient, ReversoTranslationClient {
 
-    private static final String CONTEXT_API = "https://context.reverso.net/bst-query-service";
-    private static final String TRANSLATE_API = "https://api.reverso.net/translate/v1/translation";
     private final WebClient contextClient;
-    private final WebClient transClient;
-    private final HighlightsExtractor extractor;
+    private final WebClient translationClient;
 
-    public ReversoApi(@Qualifier("API-context") ReversoLanguageResolver ctxResolver,
-                      @Qualifier("API-translate") ReversoLanguageResolver transResolver,
-                      HighlightsExtractor extractor) {
-        contextClient = WebClient.create(CONTEXT_API);
-        transClient = WebClient.create(TRANSLATE_API);
-        this.ctxResolver = ctxResolver;
-        this.transResolver = transResolver;
-        this.extractor = extractor;
+    public ReversoApi(@Qualifier("context-webclient") WebClient contextClient,
+                      @Qualifier("translation-webclient") WebClient translationClient) {
+        this.contextClient = contextClient;
+        this.translationClient = translationClient;
     }
 
     // TODO: may be not block, and web client via config
     @Override
-    public List<ReversoContextTranslation> getTranslations(Language source, Language target, String phrase) throws Exception {
+    public List<ReversoContext> getContexts(ReversoLanguage source, ReversoLanguage target, String phrase) throws Exception {
         return contextClient.post()
                 .bodyValue(createRequest(source, target, phrase))
                 .retrieve()
@@ -52,32 +45,34 @@ public class ReversoApi implements ReversoContextClient, ReversoTranslationClien
                 .collect(Collectors.toList());
     }
 
-    private ReversoContextRequest createRequest(Language source, Language target, String phrase){
+    private ReversoContextRequest createRequest(ReversoLanguage source, ReversoLanguage target, String phrase){
         ReversoContextRequest request = new ReversoContextRequest();
         request.setMode(0);
         request.setNPage(1);
-        request.setSourceLang(ctxResolver.resolve(source));
-        request.setTargetLang(ctxResolver.resolve(target));
+        request.setSourceLang(source.getContextApiStandard());
+        request.setTargetLang(target.getContextApiStandard());
         request.setSourceText(phrase);
         request.setTargetText("");
         return request;
     }
 
-    private ReversoContextTranslation mapToContextTranslations(ReversoContextResponse.Context response){
+    private ReversoContext mapToContextTranslations(ReversoContextResponse.Context response){
         ReversoContextSentence sourceContext = createContextSentence(response.getSourceSentence());
         ReversoContextSentence targetContext = createContextSentence(response.getTargetSentence());
-        return new ReversoContextTranslation(sourceContext, targetContext);
+        return new ReversoContext(sourceContext, targetContext);
     }
 
     private ReversoContextSentence createContextSentence(String text){
-        CuttableText extracted = extractor.extract(text);
-        return ReversoContextSentence.fromCutPoints(extracted.getText(), extracted.getCutPoints());
+        CuttableText extracted = HighlightsExtractor.extract(text);
+        return ReversoContextSentence.fromPairHighlightPoints(extracted.getText(), extracted.getCutPoints());
     }
 
+
     @Override
-    public List<ReversoContextTranslation> getContexts(Language source, Language target, String phrase) throws Exception {
+    public List<ReversoTranslation> getTranslations(ReversoLanguage source, ReversoLanguage target, String phrase) throws Exception {
         return null;
     }
+
 
     private ReversoTranslationRequest createRequest(Language source, Language target, String phrase){
         ReversoTranslationRequest request = new ReversoTranslationRequest();

@@ -9,7 +9,6 @@ public class HighlightsExtractor {
     public static final Pattern LINKS_PATTERN = Pattern.compile("</?a[^>]*>");
 
     private HighlightsExtractor(){
-
     }
 
     public static CuttableText extract(String text){

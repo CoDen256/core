@@ -1,7 +1,8 @@
-package coden.reverso.api;
+package coden.reverso.client.api.context;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+// may be builder
 public class ReversoContextRequest {
 
     @JsonProperty("source_text")

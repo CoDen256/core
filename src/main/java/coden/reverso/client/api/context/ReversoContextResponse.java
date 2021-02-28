@@ -1,4 +1,4 @@
-package coden.reverso.api;
+package coden.reverso.client.api.context;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

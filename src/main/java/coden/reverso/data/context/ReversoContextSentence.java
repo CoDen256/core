@@ -1,4 +1,4 @@
-package coden.reverso.context;
+package coden.reverso.data.context;
 
 import java.util.List;
 import java.util.stream.Collectors;
