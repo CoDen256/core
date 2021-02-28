@@ -1,5 +1,10 @@
 package coden.multitran.context;
 
+/**
+ * The context sentence containing the requested phrase.
+ *
+ * @author Denys Chernyshov
+ */
 public class MultitranContextSentence {
     private String sentence;
 

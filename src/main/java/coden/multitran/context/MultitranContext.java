@@ -1,5 +1,10 @@
 package coden.multitran.context;
 
+/**
+ * Represents a data class for the context fetched from the multitran.com
+ *
+ * @author Denys Chernyshov
+ */
 public class MultitranContext {
 
     private MultitranContextSentence source;

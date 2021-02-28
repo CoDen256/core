@@ -6,8 +6,14 @@ plugins {
 }
 
 group = 'coden'
-version = '1.0'
+version = '1.1'
 sourceCompatibility = '11'
+
+ext {
+    publishArtifactid = 'multitran-api'
+    publishGroupId = group
+    publishVersion = version
+}
 
 repositories {
     mavenCentral()
@@ -22,8 +28,8 @@ jar {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
     api group: 'org.apache.commons', name: 'commons-text', version: '1.9'
+    implementation 'org.springframework.boot:spring-boot-starter'
     implementation group: 'org.jsoup', name: 'jsoup', version: '1.13.1'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
@@ -35,9 +41,9 @@ test {
 publishing{
     publications {
         maven(MavenPublication){
-            groupId = "coden"
-            artifactId = "multitran-api"
-            version = "1.0"
+            groupId = publishGroupId
+            artifactId = publishArtifactid
+            version = publishVersion
 
             from components.java
         }
