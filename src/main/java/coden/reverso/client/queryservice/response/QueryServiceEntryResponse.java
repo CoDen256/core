@@ -1,12 +1,22 @@
-package coden.reverso.client.queryservice.context.response;
+package coden.reverso.client.queryservice.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ReversoContextEntryResponse {
+/**
+ * The response entry returned by reverso query service in json format.
+ * It is contained in {@link QueryServiceResponse}
+ *
+ * @author Denys Chernyshov
+ */
+public class QueryServiceEntryResponse {
     @JsonProperty("s_text")
     private String sourceSentence;
     @JsonProperty("t_text")
     private String targetSentence;
+
+    private QueryServiceEntryResponse() {
+
+    }
 
     public String getSourceSentence() {
         return sourceSentence;
@@ -14,13 +24,5 @@ public class ReversoContextEntryResponse {
 
     public String getTargetSentence() {
         return targetSentence;
-    }
-
-    public void setSourceSentence(String sourceSentence) {
-        this.sourceSentence = sourceSentence;
-    }
-
-    public void setTargetSentence(String targetSentence) {
-        this.targetSentence = targetSentence;
     }
 }
