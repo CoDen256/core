@@ -8,6 +8,9 @@ import java.util.stream.Stream;
 /**
  * Represents a reverso translation client that can fetch needed information and provide
  * stream of {@link ReversoContextHighlight} for the given request
+ *
+ * @author Denys Chernyshov
+ * @see ReversoTranslation
  */
 public interface ReversoTranslationClient {
     /**
