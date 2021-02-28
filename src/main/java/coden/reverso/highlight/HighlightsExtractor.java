@@ -22,9 +22,10 @@ public class HighlightsExtractor {
         return innerText;
     }
 
+
     private static void cutNextHighlight(CuttableText innerText) {
-        innerText.cut(HIGHLIGHT_TAG_OPEN);
-        innerText.cut(HIGHLIGHT_TAG_CLOSE);
+        innerText.cutAndSave(HIGHLIGHT_TAG_OPEN);
+        innerText.cutAndSave(HIGHLIGHT_TAG_CLOSE);
     }
 
     private static void removeLinks(CuttableText innerText) {

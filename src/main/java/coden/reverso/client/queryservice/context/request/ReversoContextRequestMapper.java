@@ -7,8 +7,8 @@ public class ReversoContextRequestMapper {
         ReversoContextRequest request = new ReversoContextRequest();
         request.setMode(0);
         request.setNPage(1);
-        request.setSourceLang(source.getContextApiStandard());
-        request.setTargetLang(target.getContextApiStandard());
+        request.setSourceLang(source.getQueryServiceStandard());
+        request.setTargetLang(target.getQueryServiceStandard());
         request.setSourceText(phrase);
         request.setTargetText("");
         return request;

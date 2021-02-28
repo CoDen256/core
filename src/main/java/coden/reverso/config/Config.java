@@ -12,13 +12,13 @@ public class Config {
     @Qualifier("api")
     @Bean
     WebClient apiWebClient() {
-        return WebClient.create(ReversoUrls.TRANSLATE_API);
+        return WebClient.create(ReversoUrls.TRANSLATE_ENDPOINT);
     }
 
     @Qualifier("query-service")
     @Bean
     WebClient queryServiceWebClient() {
-        return WebClient.create(ReversoUrls.QUERY_SERVICE_API);
+        return WebClient.create(ReversoUrls.QUERY_SERVICE_ENDPOINT);
     }
 
 }
