@@ -2,7 +2,13 @@ package coden.reverso.client.api.translation.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ReversoTranslationOptions {
+/**
+ * Represents json mapping for the request options that will be passed to
+ * {@link ApiRequest} to obtain translations
+ *
+ * @author Denys Chernyshov
+ */
+public class ApiRequestOptions {
     @JsonProperty("origin")
     private String origin;
 
@@ -14,7 +20,6 @@ public class ReversoTranslationOptions {
 
     @JsonProperty("languageDetection")
     private boolean languageDetection;
-
 
     public String getOrigin() {
         return origin;
@@ -46,5 +51,36 @@ public class ReversoTranslationOptions {
 
     public void setLanguageDetection(boolean languageDetection) {
         this.languageDetection = languageDetection;
+    }
+
+    public static class Builder {
+        private final ApiRequestOptions apitranslationrequestoptions;
+        public Builder(){
+            apitranslationrequestoptions = new ApiRequestOptions();
+        }
+
+        public Builder setOrigin(String origin) {
+            apitranslationrequestoptions.setOrigin(origin);
+            return this;
+        }
+
+        public Builder enableSentenceSplitter() {
+            apitranslationrequestoptions.setSentenceSplitter(true);
+            return this;
+        }
+
+        public Builder enableContextResults() {
+            apitranslationrequestoptions.setContextResults(true);
+            return this;
+        }
+
+        public Builder enableLanguageDetection() {
+            apitranslationrequestoptions.setLanguageDetection(true);
+            return this;
+        }
+
+        public ApiRequestOptions create(){
+            return apitranslationrequestoptions;
+        }
     }
 }

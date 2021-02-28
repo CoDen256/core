@@ -4,7 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class ReversoTranslationContextEntry {
+/**
+ * Represents a json mapping for context response entry.
+ *
+ * @author Denys Chernyshov
+ */
+public class ApiContextEntryResponse {
     @JsonProperty("translation")
     private String translation;
 
@@ -23,7 +28,7 @@ public class ReversoTranslationContextEntry {
     @JsonProperty("colloquial")
     private boolean isColloquial;
 
-    private ReversoTranslationContextEntry() {
+    private ApiContextEntryResponse() {
     }
 
     public String getTranslation() {

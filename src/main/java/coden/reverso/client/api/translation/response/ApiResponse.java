@@ -4,7 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class ReversoTranslationResponse {
+/**
+ * Represents a reverso api response json mapping. It contains the original input
+ * the translations as well as the contexts.
+ *
+ * @author Denys Chernyshov
+ */
+public class ApiResponse {
 
     @JsonProperty("input")
     private List<String> input;
@@ -12,11 +18,12 @@ public class ReversoTranslationResponse {
     @JsonProperty("translation")
     private List<String> translation;
 
+    //TODO: json path
     @JsonProperty("contextResults")
-    private ReversoTranslationContextResults contextResults;
+    private ApiContextResultsResponse contextResults;
 
 
-    private ReversoTranslationResponse() {
+    private ApiResponse() {
     }
 
     public List<String> getInput() {
@@ -27,7 +34,7 @@ public class ReversoTranslationResponse {
         return translation;
     }
 
-    public ReversoTranslationContextResults getContextResults() {
+    public ApiContextResultsResponse getContextResults() {
         return contextResults;
     }
 }
