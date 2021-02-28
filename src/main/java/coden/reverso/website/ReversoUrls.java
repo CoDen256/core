@@ -18,7 +18,7 @@ import java.util.Map;
  *
  * @author Denys Chernyshov
  */
-public class ReversoUrls {
+public final class ReversoUrls {
 
     public static final String CONTEXT_URL_PATTERN = "https://www.context.reverso.net/translation/{source}-{target}/{phrase}";
     public static final String TRANSLATION_URL_PATTERN = "https://www.reverso.net/translationresults.aspx?lang=EN&direction={source}-{target}";

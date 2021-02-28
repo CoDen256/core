@@ -12,9 +12,9 @@ import java.io.IOException;
  * @author Denys Chernyshov
  */
 @FunctionalInterface
-public interface DocumentFetcher {
+public interface ReversoDocumentFetcher {
     /**
-     * Fetches the document for the page
+     * Fetches the document for the page from reverso.net
      *
      * @param source
      *         the source language

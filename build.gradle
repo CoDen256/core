@@ -9,6 +9,12 @@ group = 'coden'
 version = '1.1'
 sourceCompatibility = '11'
 
+ext {
+    publishArtifactid = 'reverso-api'
+    publishGroupId = group
+    publishVersion = version
+}
+
 bootJar {
     enabled = false
 }
@@ -35,9 +41,9 @@ test {
 publishing{
     publications {
         maven(MavenPublication){
-            groupId = "coden"
-            artifactId = "reverso-api"
-            version = "1.0"
+            groupId = publishGroupId
+            artifactId = publishArtifactid
+            version = publishVersion
 
             from components.java
         }

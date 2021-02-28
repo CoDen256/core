@@ -20,9 +20,9 @@ import java.util.stream.Stream;
 public class ReversoCrawler implements ReversoContextClient {
 
     /** The Document fetcher, that will provide html document for reverso contexts */
-    private final DocumentFetcher contextFetcher;
+    private final ReversoDocumentFetcher contextFetcher;
 
-    public ReversoCrawler(@Qualifier("context") DocumentFetcher contextFetcher) {
+    public ReversoCrawler(@Qualifier("context") ReversoDocumentFetcher contextFetcher) {
         this.contextFetcher = contextFetcher;
     }
 
