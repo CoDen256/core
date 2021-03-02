@@ -20,7 +20,7 @@ import java.util.Map;
  */
 public final class ReversoUrls {
 
-    public static final String CONTEXT_URL_PATTERN = "https://www.context.reverso.net/translation/{source}-{target}/{phrase}";
+    public static final String CONTEXT_URL_PATTERN = "https://context.reverso.net/translation/{source}-{target}/{phrase}";
     public static final String TRANSLATION_URL_PATTERN = "https://www.reverso.net/translationresults.aspx?lang=EN&direction={source}-{target}";
     public static final String QUERY_SERVICE_ENDPOINT = "https://context.reverso.net/bst-query-service";
     public static final String TRANSLATE_ENDPOINT = "https://api.reverso.net/translate/v1/translation";

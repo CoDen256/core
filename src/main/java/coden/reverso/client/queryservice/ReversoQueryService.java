@@ -88,7 +88,7 @@ public class ReversoQueryService implements ReversoContextClient {
      *         the response to map
      * @return the contexts contained by the response
      */
-    public Stream<ReversoContext> mapToContexts(QueryServiceResponse response) {
+    private Stream<ReversoContext> mapToContexts(QueryServiceResponse response) {
         return response.getList().stream().map(this::mapToContext);
     }
 
