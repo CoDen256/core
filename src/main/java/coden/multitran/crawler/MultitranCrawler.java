@@ -21,7 +21,7 @@ public class MultitranCrawler implements MultitranTranslationClient {
     private static final Pattern queryWordSearchPattern = Pattern.compile(".*&?s=[^&]*.*");
     private static final String queryLanguagePattern = ".*&?%s=%s.*";
 
-    /** The Document Fetcher to parse */
+    /** The Document Fetcher to fetch document that will be parsed */
     private final MultitranDocumentFetcher fetcher;
 
     public MultitranCrawler(MultitranDocumentFetcher fetcher) {
