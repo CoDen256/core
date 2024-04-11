@@ -1,5 +1,6 @@
 package io.github.coden.telegram.abilities
 
+import io.github.coden.telegram.db.BotDB
 import org.telegram.abilitybots.api.bot.AbilityBot
 import org.telegram.abilitybots.api.objects.Ability
 import org.telegram.abilitybots.api.util.AbilityUtils.EMPTY_USER
@@ -13,9 +14,8 @@ open class BaseTelegramBot<DB : BotDB>(
     options: DefaultBotOptions = optionsOf()
 ) : AbilityBot(config.token, config.username, botDB, options), RunnableLongPollingBot{
 
-    override fun db(): DB {
-        return botDB
-    }
+    protected val db = botDB
+    override fun db(): DB = botDB
 
     override fun creatorId(): Long {
         TODO("Not yet implemented")
