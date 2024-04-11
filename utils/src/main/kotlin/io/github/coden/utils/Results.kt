@@ -1,12 +1,13 @@
 package io.github.coden.utils
 
+import com.andreapivetta.kolor.Color
 import org.apache.logging.log4j.kotlin.KotlinLogger
 
 
 fun <T> Result<T>.logInteraction(logger: KotlinLogger, operation: (T) -> String): Result<T> {
     return this
-        .onSuccess { logger.info("${operation(it)} - Success!") }
-        .onFailure { logger.error("Failed! - " + it.message, it) }
+        .onSuccess { logger.info("${operation(it)} - ${Color.LIGHT_GREEN("Success!")}") }
+        .onFailure { logger.error("${Color.LIGHT_RED("Failed!")} - " + it.message, it) }
 }
 
 fun <T : Any> T.success(): Result<T> = Result.success(this)

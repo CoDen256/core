@@ -1,5 +1,7 @@
 package io.github.coden.utils
 
+import com.andreapivetta.kolor.Color
+import com.andreapivetta.kolor.Kolor
 import org.apache.commons.lang3.RandomStringUtils
 import java.util.concurrent.ThreadLocalRandom
 
@@ -31,4 +33,14 @@ fun randomConsonant(): String{
 
 fun randomNumber(): String{
     return RandomStringUtils.randomNumeric(1)
+}
+
+operator fun Color.invoke(input: String): String {
+    return Kolor.foreground(input, this)
+}
+fun Color.bg(input: String): String {
+    return Kolor.background(input, this)
+}
+fun Color.fg(input: String): String {
+    return Kolor.foreground(input, this)
 }
