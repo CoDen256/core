@@ -18,7 +18,7 @@ open class BaseTelegramBot<DB : BotDB>(
     override fun db(): DB = botDB
 
     override fun creatorId(): Long {
-        TODO("Not yet implemented")
+        return config.target
     }
 
     override fun run() {
