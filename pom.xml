@@ -11,5 +11,6 @@
     <modules>
         <module>telegram</module>
         <module>utils</module>
+        <module>database</module>
     </modules>
 </project>

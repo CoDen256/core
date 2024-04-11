@@ -17,7 +17,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard
 import java.util.function.Predicate
 
-fun options(allowedUpdates: List<String> = ALLOWED_UPDATES): DefaultBotOptions {
+fun optionsOf(allowedUpdates: List<String> = ALLOWED_UPDATES): DefaultBotOptions {
     return DefaultBotOptions()
         .apply { this.allowedUpdates = allowedUpdates}
 }
