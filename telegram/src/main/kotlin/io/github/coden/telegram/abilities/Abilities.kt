@@ -1,21 +1,19 @@
 package io.github.coden.telegram.abilities
 
+import io.github.coden.telegram.db.Chat
+import io.github.coden.telegram.db.Chat.Companion.asChat
+import io.github.coden.telegram.senders.sendSilently
+import io.github.coden.telegram.senders.styled
 import io.github.coden.utils.notNullOrFailure
 import org.apache.logging.log4j.kotlin.logger
 import org.telegram.abilitybots.api.bot.BaseAbilityBot
 import org.telegram.abilitybots.api.objects.*
-import org.telegram.abilitybots.api.sender.MessageSender
 import org.telegram.abilitybots.api.util.AbilityUtils.getChatId
 import org.telegram.telegrambots.bots.DefaultBotOptions
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText.EditMessageTextBuilder
 import org.telegram.telegrambots.meta.api.objects.Message
 import org.telegram.telegrambots.meta.api.objects.Update
 import org.telegram.telegrambots.meta.api.objects.reactions.ReactionType
 import org.telegram.telegrambots.meta.api.objects.reactions.ReactionTypeEmoji
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard
 import java.util.function.Predicate
 
 fun optionsOf(allowedUpdates: List<String> = ALLOWED_UPDATES): DefaultBotOptions {
@@ -50,13 +48,13 @@ fun replyOn(filter: (Update) -> Boolean, handle: (BaseAbilityBot, Update) -> Uni
     return Reply.of({ bot, u -> tryHandle(handle, u, bot) }, filter)
 }
 
-fun replyOnCallback(handle: (Update, String) -> Unit): Reply = replyOn(Flag.CALLBACK_QUERY) {
-    upd: Update -> handle(upd, upd.callbackQuery.data)
-}
+fun replyOnCallback(handle: (Update, String) -> Unit): Reply =
+    replyOn(Flag.CALLBACK_QUERY) { upd: Update -> handle(upd, upd.callbackQuery.data)
+    }
 
-fun replyOnCallback(handle: (BaseAbilityBot, Update, String) -> Unit): Reply = replyOn(Flag.CALLBACK_QUERY) {
-        bot, upd -> handle(bot, upd, upd.callbackQuery.data)
-}
+fun replyOnCallback(handle: (BaseAbilityBot, Update, String) -> Unit): Reply =
+    replyOn(Flag.CALLBACK_QUERY) { bot, upd -> handle(bot, upd, upd.callbackQuery.data)
+    }
 
 fun replyOnReaction(vararg emojis: String, handle: (Update) -> Unit): Reply {
     return replyOn({ it.newEmojis.any { emoji -> emojis.contains(emoji) } },
@@ -92,72 +90,18 @@ fun tryHandle(handle: (BaseAbilityBot, Update) -> Unit, update: Update, bot: Bas
     try {
         handle(bot, update)
     } catch (e: Exception) {
-        bot.silent().send("⚠ ${e.message}\n\n$e", update.chatId())
+        bot.sender().sendSilently("⚠ ${e.message}\n\n$e".styled(), update.chat())
     }
 }
 
+fun Update.chat(): Chat = chatId().asChat()
 fun Update.chatId(): Long =
-    if (this.messageReaction != null) {
-        messageReaction.chat.id
-    } else {
-        getChatId(this)
-    }
+    if (this.messageReaction != null) { messageReaction.chat.id }
+    else { getChatId(this) }
 
-fun Update.strChatId(): String = chatId().toString()
-
-fun MessageSender.sendHtml(text: String, chatId: Long, replyMarkup: ReplyKeyboard? = null): Message {
-    val message = SendMessage.builder().apply {
-        parseMode("html")
-        text(text)
-        chatId(chatId.toString())
-        replyMarkup(replyMarkup)
-    }.build()
-    return execute(message)
-}
-
-fun MessageSender.sendMd(
-    text: String,
-    chatId: Long,
-    replyMarkup: ReplyKeyboard? = null,
-    replyTo: Int? = null
-): Message {
-    val message = SendMessage.builder().apply {
-        parseMode("Markdown")
-        text(text)
-        chatId(chatId.toString())
-        replyToMessageId(replyTo)
-        replyMarkup(replyMarkup)
-    }.build()
-    return execute(message)
-}
-
-fun MessageSender.editMdRequest(
-    text: String,
-    chatId: Long,
-    replyMarkup: InlineKeyboardMarkup? = null,
-    messageId: Int? = null
-): EditMessageTextBuilder {
-    return EditMessageText.builder().apply {
-        parseMode("Markdown")
-        messageId(messageId)
-        text(text)
-        chatId(chatId.toString())
-        replyMarkup(replyMarkup)
-
-    }
-}
-
-fun MessageSender.editMd(messageId: Int, text: String, chatId: Long, replyMarkup: InlineKeyboardMarkup? = null) {
-    val request = editMdRequest(text = text, chatId, replyMarkup, messageId).build()
-    execute(request)
-}
-
-fun String.asCodeSnippet() = "<pre>$this</pre>"
-
-fun justText(update: Update): Boolean {
+fun isJustText(update: Update): Boolean {
     return Flag.TEXT.test(update) && !isCommand(update) && !isId(update)
 }
-
 fun isCommand(update: Update) = update.message.text.startsWith("/")
 fun isId(update: Update) = update.message.text.startsWith("#")
 

@@ -5,7 +5,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 
 
 data class Keyboard(
-    val lines: List<KeyboardLine>,
+    val lines: List<KeyboardLine> = listOf(),
 )
 
 data class KeyboardLine(
@@ -50,14 +50,15 @@ class KeyboardBuilder {
     }
 }
 
-fun keyboard(keyboard: KeyboardBuilder.() -> Unit): InlineKeyboardMarkup {
+fun keyboard(keyboard: KeyboardBuilder.() -> Unit): Keyboard {
     val new = KeyboardBuilder()
     new.keyboard()
-    return new.build().asReplyKeyboard()
+    return new.build()
 }
 
 
-fun Keyboard.asReplyKeyboard(): InlineKeyboardMarkup {
+fun Keyboard.asInlineKeyboardMarkup(): InlineKeyboardMarkup? {
+    if (lines.isEmpty()) return null
     val markup = InlineKeyboardMarkup.builder()
 
     for (line in lines) {
