@@ -17,23 +17,23 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageTe
 import org.telegram.telegrambots.meta.api.objects.Update
 import java.io.Serializable
 
-fun MessageSender.sendSilently(
+fun MessageSender.silentSend(
     text: String,
     chat: Chat,
-    replyTo: Message? = null,
-    keyboard: Keyboard = Keyboard()
+    keyboard: Keyboard = Keyboard(),
+    replyTo: Message? = null
 ): Result<BotMessage>{
-    return sendSilently(text.styled(), chat, replyTo, keyboard)
+    return silentSend(text.styled(), chat, keyboard, replyTo)
 }
 
-fun MessageSender.sendSilently(
+fun MessageSender.silentSend(
     text: StyledString,
     chat: Chat,
-    replyTo: Message? = null,
-    keyboard: Keyboard = Keyboard()
+    keyboard: Keyboard = Keyboard(),
+    replyTo: Message? = null
 ): Result<BotMessage>{
     return try {
-        send(text, chat, replyTo, keyboard).success()
+        send(text, chat, keyboard, replyTo).success()
     }catch (e:Exception){
         logger.error("Could not send a text message ${e.message}")
         Result.failure(e)
@@ -43,15 +43,15 @@ fun MessageSender.sendSilently(
 fun MessageSender.send(
     text: String,
     chat: Chat,
-    replyTo: Message? = null,
-    keyboard: Keyboard = Keyboard()
-): BotMessage { return send(text.styled(), chat, replyTo, keyboard) }
+    keyboard: Keyboard = Keyboard(),
+    replyTo: Message? = null
+): BotMessage { return send(text.styled(), chat, keyboard, replyTo) }
 
 fun MessageSender.send(
     text: StyledString,
     chat: Chat,
-    replyTo: Message? = null,
-    keyboard: Keyboard = Keyboard()
+    keyboard: Keyboard = Keyboard(),
+    replyTo: Message? = null
 ): BotMessage {
     val message = SendMessage.builder().apply {
         parseMode(text.parseMode.mode)
@@ -64,10 +64,10 @@ fun MessageSender.send(
 }
 
 fun MessageSender.editBuilder(
-    text: StyledString?,
-    chat: Chat?,
-    message: Message?, //TODO Put chat as message's part
-    keyboard: Keyboard = Keyboard()
+    text: StyledString? = null,
+    chat: Chat? = null,
+    keyboard: Keyboard = Keyboard(),
+    message: Message? = null //TODO Put chat as message's part
 ): EditMessageTextBuilder {
     return EditMessageText.builder().apply {
         parseMode(text?.parseMode?.mode)
@@ -89,7 +89,7 @@ fun MessageSender.edit(text: StyledString,
                        chat: Chat,
                        message: Message,
                        keyboard: Keyboard = Keyboard()): Serializable {
-    val request: EditMessageText = editBuilder(text, chat, message, keyboard).build()
+    val request: EditMessageText = editBuilder(text, chat, keyboard, message).build()
     return execute(request)
 }
 

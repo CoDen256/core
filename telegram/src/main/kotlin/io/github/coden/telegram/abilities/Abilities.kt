@@ -2,7 +2,7 @@ package io.github.coden.telegram.abilities
 
 import io.github.coden.telegram.db.Chat
 import io.github.coden.telegram.db.Chat.Companion.asChat
-import io.github.coden.telegram.senders.sendSilently
+import io.github.coden.telegram.senders.silentSend
 import io.github.coden.telegram.senders.styled
 import io.github.coden.utils.notNullOrFailure
 import org.apache.logging.log4j.kotlin.logger
@@ -90,7 +90,7 @@ fun tryHandle(handle: (BaseAbilityBot, Update) -> Unit, update: Update, bot: Bas
     try {
         handle(bot, update)
     } catch (e: Exception) {
-        bot.sender().sendSilently("⚠ ${e.message}\n\n$e".styled(), update.chat())
+        bot.sender().silentSend("⚠ ${e.message}\n\n$e".styled(), update.chat())
     }
 }
 

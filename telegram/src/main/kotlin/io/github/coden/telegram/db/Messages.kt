@@ -19,18 +19,11 @@ data class Chat(val id: Long): Serializable {
     }
 }
 
-data class Message(val id: Int): Serializable{
-    companion object {
-        fun MaybeInaccessibleMessage.asMessage(): Message {
-            return Message(this.messageId)
-        }
-        fun Number.asMessage(): Message {
-            return Message(this.toInt())
-        }
-    }
+sealed interface Message: Serializable{
+    val id: Int
 }
 
-data class OwnerMessage(val id: Int): Serializable {
+data class OwnerMessage(override val id: Int): Message {
     companion object {
         fun MaybeInaccessibleMessage.asOwner(): OwnerMessage {
             return OwnerMessage(this.messageId)
@@ -42,7 +35,7 @@ data class OwnerMessage(val id: Int): Serializable {
 
 }
 
-data class BotMessage(val id: Int): Serializable {
+data class BotMessage(override val id: Int): Message {
     companion object {
         fun MaybeInaccessibleMessage.asBot(): BotMessage {
             return BotMessage(this.messageId)
