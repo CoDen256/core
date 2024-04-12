@@ -12,6 +12,7 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageTe
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText.EditMessageTextBuilder
 import org.telegram.telegrambots.meta.api.objects.Message
 import org.telegram.telegrambots.meta.api.objects.Update
+import org.telegram.telegrambots.meta.api.objects.reactions.ReactionType
 import org.telegram.telegrambots.meta.api.objects.reactions.ReactionTypeEmoji
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard
@@ -19,7 +20,7 @@ import java.util.function.Predicate
 
 fun optionsOf(allowedUpdates: List<String> = ALLOWED_UPDATES): DefaultBotOptions {
     return DefaultBotOptions()
-        .apply { this.allowedUpdates = allowedUpdates}
+        .apply { this.allowedUpdates = allowedUpdates }
 }
 
 val ALLOWED_UPDATES = listOf(
@@ -32,45 +33,46 @@ val ALLOWED_UPDATES = listOf(
     "inline_query"
 )
 
-fun replyOn(filter: (Update) -> Boolean, handle: (Update) -> Unit): Reply {
-    return Reply.of({ bot, u ->
-        tryHandle(handle, u, bot)
-    }, filter)
+
+fun replyOn(predicate: Predicate<Update>, handle: (Update) -> Unit): Reply {
+    return replyOn({ predicate.test(it) }, { it -> handle(it) })
 }
 
-fun replyOn(filter: Predicate<Update>, handle: (Update) -> Unit): Reply {
-    return replyOn({ filter.test(it) }, handle)
+fun replyOn(filter: (Update) -> Boolean, handle: (Update) -> Unit): Reply {
+    return Reply.of({ bot, u -> tryHandle(handle, u, bot) }, filter)
+}
+
+fun replyOn(predicate: Predicate<Update>, handle: (BaseAbilityBot, Update) -> Unit): Reply {
+    return replyOn({ predicate.test(it) }, { bot, upd -> handle(bot, upd) })
+}
+
+fun replyOn(filter: (Update) -> Boolean, handle: (BaseAbilityBot, Update) -> Unit): Reply {
+    return Reply.of({ bot, u -> tryHandle(handle, u, bot) }, filter)
+}
+
+fun replyOnCallback(handle: (Update, String) -> Unit): Reply = replyOn(Flag.CALLBACK_QUERY) {
+    upd: Update -> handle(upd, upd.callbackQuery.data)
+}
+
+fun replyOnCallback(handle: (BaseAbilityBot, Update, String) -> Unit): Reply = replyOn(Flag.CALLBACK_QUERY) {
+        bot, upd -> handle(bot, upd, upd.callbackQuery.data)
 }
 
 fun replyOnReaction(vararg emojis: String, handle: (Update) -> Unit): Reply {
-    return replyOn({ upd ->
-        !upd.messageReaction?.newReaction.isNullOrEmpty()
-                && upd.messageReaction
-            .newReaction
-            .filterIsInstance<ReactionTypeEmoji>()
-            .any { emojis.contains(it.emoji) }
-    }, {
-        logger("replyOnReaction").info("Handling emojis ${
-            it.messageReaction
-                .newReaction
-                .filterIsInstance<ReactionTypeEmoji>()
-                .map { it.emoji }}")
-        println()
-        handle(it)
-    })
+    return replyOn({ it.newEmojis.any { emoji -> emojis.contains(emoji) } },
+        { upd: Update ->
+            logger("replyOnReaction").info("Handling emojis ${upd.newEmojis}")
+            handle(upd)
+        })
 }
 
-fun tryHandle(
-    handle: (Update) -> Unit,
-    u: Update,
-    bot: BaseAbilityBot
-) {
-    try {
-        handle(u)
-    } catch (e: Exception) {
-        bot.silent().send("⚠ ${e.message}\n\n$e", u.chatId())
-    }
-}
+val Update.newReactions: List<ReactionType>
+    get() = messageReaction?.newReaction ?: emptyList()
+
+val Update.newEmojis: List<String>
+    get() = newReactions
+        .filterIsInstance<ReactionTypeEmoji>()
+        .map { it.emoji }
 
 fun ability(cmd: String, handle: (Update) -> Unit): Ability {
     return Ability.builder()
@@ -82,8 +84,16 @@ fun ability(cmd: String, handle: (Update) -> Unit): Ability {
         .build()
 }
 
-fun replyOnCallback(handle: (Update, String) -> Unit): Reply = replyOn(Flag.CALLBACK_QUERY) {
-    handle(it, it.callbackQuery.data)
+fun tryHandle(handle: (Update) -> Unit, update: Update, bot: BaseAbilityBot) {
+    return tryHandle({ _, u -> handle(u) }, update, bot)
+}
+
+fun tryHandle(handle: (BaseAbilityBot, Update) -> Unit, update: Update, bot: BaseAbilityBot) {
+    try {
+        handle(bot, update)
+    } catch (e: Exception) {
+        bot.silent().send("⚠ ${e.message}\n\n$e", update.chatId())
+    }
 }
 
 fun Update.chatId(): Long =
