@@ -1,0 +1,67 @@
+package io.github.coden.telegram.debug
+
+import io.github.coden.telegram.db.Message
+import io.github.coden.telegram.db.OwnerMessage
+import org.telegram.telegrambots.meta.api.objects.Chat
+import org.telegram.telegrambots.meta.api.objects.Update
+import org.telegram.telegrambots.meta.api.objects.User
+import org.telegram.telegrambots.meta.api.objects.reactions.MessageReactionUpdated
+import org.telegram.telegrambots.meta.api.objects.reactions.ReactionTypeEmoji
+import org.telegram.telegrambots.meta.api.objects.Chat as TelegramApiChat
+import org.telegram.telegrambots.meta.api.objects.Message as TelegramApiMessage
+
+fun messageUpdate(text: String, user: User = DEFAULT_USER, message: Message = DEFAULT_MESSAGE): Update {
+    return Update().apply {
+        this.message = message(text, user, message)
+    }
+}
+
+fun editUpdate(text: String, user: User = DEFAULT_USER, message: Message = DEFAULT_MESSAGE): Update {
+    return Update().apply {
+        editedMessage = message(text, user, message)
+    }
+}
+
+fun reactionUpdate(emoji: String, user: User = DEFAULT_USER, message: Message = DEFAULT_MESSAGE): Update {
+    return Update().apply {
+        this.messageReaction = messageReaction(emoji, user, message)
+    }
+}
+
+private fun messageReaction(emoji: String, user: User = DEFAULT_USER, message: Message = DEFAULT_MESSAGE): MessageReactionUpdated {
+    return MessageReactionUpdated().apply {
+        this.newReaction = listOf(ReactionTypeEmoji("emoji", emoji))
+        this.user = user
+        this.chat = chat(user)
+        this.messageId = message.id
+    }
+}
+
+fun message(text: String, user: User = DEFAULT_USER, message: Message = DEFAULT_MESSAGE): TelegramApiMessage {
+    return TelegramApiMessage().apply {
+        this.text = text
+        this.messageId = message.id
+        from = user
+        chat = chat(user)
+    }
+}
+val DEFAULT_MESSAGE = OwnerMessage(0)
+val DEFAULT_USER = user(283382228, "Denys", "Chernyshov", "coden256")
+val DEFAULT_CHAT = chat(DEFAULT_USER)
+
+fun chat(user: User): Chat {
+    return TelegramApiChat().apply {
+        this.id = user.id
+        type = "private"
+        userName = user.userName
+    }
+}
+
+fun user(id: Long, firstName: String, lastName: String, userName: String): User {
+    return User().apply {
+        this.id = id
+        this.firstName = firstName
+        this.lastName = lastName
+        this.userName = userName
+    }
+}

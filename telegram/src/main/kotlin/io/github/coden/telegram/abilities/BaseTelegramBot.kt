@@ -14,18 +14,21 @@ open class BaseTelegramBot<DB : BotDB>(
     options: DefaultBotOptions = optionsOf()
 ) : AbilityBot(config.token, config.username, botDB, options), RunnableLongPollingBot{
 
-    protected val db = botDB
+    protected open val db = botDB
     override fun db(): DB = botDB
 
-    override fun creatorId(): Long {
-        return config.target
-    }
+    override fun creatorId(): Long { return config.target }
 
     override fun run() {
-        silent.sendMd(config.intro, config.target)
+        greet()
+        sendDebugUpdates()
     }
 
-    fun start(): Ability = ability("start") { run() }
+    open fun sendDebugUpdates() { onUpdatesReceived(debugUpdates()) }
+    open fun debugUpdates(): List<Update>{ return listOf() }
+
+    open fun start(): Ability = ability("start") { greet() }
+    open fun greet() { silent.sendMd(config.intro, config.target) }
 
     override fun onUpdateReceived(update: Update?) {
         // library does not see a valid user on reactions
