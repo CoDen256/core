@@ -1,7 +1,9 @@
 package io.github.coden.telegram.debug
 
+import io.github.coden.telegram.abilities.chat
 import io.github.coden.telegram.db.Message
 import io.github.coden.telegram.db.OwnerMessage
+import org.telegram.telegrambots.meta.api.objects.CallbackQuery
 import org.telegram.telegrambots.meta.api.objects.Chat
 import org.telegram.telegrambots.meta.api.objects.Update
 import org.telegram.telegrambots.meta.api.objects.User
@@ -28,7 +30,24 @@ fun reactionUpdate(emoji: String, user: User = DEFAULT_USER, message: Message = 
     }
 }
 
-private fun messageReaction(emoji: String, user: User = DEFAULT_USER, message: Message = DEFAULT_MESSAGE): MessageReactionUpdated {
+fun callbackUpdate(callbackData: String,
+                   user: User = DEFAULT_USER,
+                   message: TelegramApiMessage = message("CALLED BACK MESSAGE: $callbackData", user)): Update {
+    return Update().apply {
+        this.callbackQuery = callbackQuery(callbackData, user, message)
+    }
+}
+
+fun callbackQuery(callbackData: String, user: User, message: TelegramApiMessage): CallbackQuery {
+    return CallbackQuery().apply {
+        this.data = callbackData
+        this.message = message
+        this.from = user
+    }
+}
+
+
+fun messageReaction(emoji: String, user: User = DEFAULT_USER, message: Message = DEFAULT_MESSAGE): MessageReactionUpdated {
     return MessageReactionUpdated().apply {
         this.newReaction = listOf(ReactionTypeEmoji("emoji", emoji))
         this.user = user
