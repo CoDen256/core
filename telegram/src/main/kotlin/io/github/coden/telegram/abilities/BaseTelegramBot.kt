@@ -1,5 +1,6 @@
 package io.github.coden.telegram.abilities
 
+import io.github.coden.telegram.commands.replyOnCallbackCommand
 import io.github.coden.telegram.db.BotDB
 import org.telegram.abilitybots.api.bot.AbilityBot
 import org.telegram.abilitybots.api.objects.Ability
@@ -8,14 +9,14 @@ import org.telegram.telegrambots.bots.DefaultBotOptions
 import org.telegram.telegrambots.meta.api.objects.ChatJoinRequest
 import org.telegram.telegrambots.meta.api.objects.Update
 
-open class BaseTelegramBot<DB : BotDB>(
-    private val config: TelegramBotConfig,
-    private val botDB: DB,
+open class BaseTelegramBot<D : BotDB>(
+    protected  val config: TelegramBotConfig,
+    private val botDB: D,
     options: DefaultBotOptions = optionsOf()
 ) : AbilityBot(config.token, config.username, botDB, options), RunnableLongPollingBot{
 
     protected open val db = botDB
-    override fun db(): DB = botDB
+    override fun db(): D = botDB
 
     override fun creatorId(): Long { return config.target }
 
