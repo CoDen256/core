@@ -1,3 +1,5 @@
+package io.github.coden.utils
+
 import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.full.memberProperties
 
@@ -7,7 +9,7 @@ annotation class QueryParam(val value: String)
 interface QueryParamEnumType { val param: String }
 
 
-fun parseQueryParams(request: Any, compile: (Any?) -> String = {toString(it)}): Map<String, String> {
+fun parseQueryParams(request: Any, compile: (Any?) -> String = { toString(it) }): Map<String, String> {
     val kClass = request::class
     if (!kClass.isData) return emptyMap()
     val map = kClass.memberProperties
