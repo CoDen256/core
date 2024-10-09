@@ -49,6 +49,31 @@
             <plugin>
                 <groupId>org.jooq</groupId>
                 <artifactId>jooq-codegen-maven</artifactId>
+                <configuration>
+                    <jdbc>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <url>${spring.datasource.url}</url>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <username>${spring.datasource.username}</username>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <password>${spring.datasource.password}</password>
+                    </jdbc>
+                    <generator>
+                        <name>org.jooq.codegen.KotlinGenerator</name>
+                        <target>
+                            <packageName>io.github.coden.persist.generated</packageName>
+                            <directory>src/main/kotlin</directory>
+                        </target>
+                        <generate>
+                            <pojosAsKotlinDataClasses>true</pojosAsKotlinDataClasses>
+                        </generate>
+                        <database>
+                            <includes>
+                                energy_costs
+                            </includes>
+                        </database>
+                    </generator>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>it.ozimov</groupId>
