@@ -1,13 +1,14 @@
 package io.github.coden.utils
 
-import com.andreapivetta.kolor.Color
+import com.github.ajalt.mordant.rendering.TextColors.brightGreen
+import com.github.ajalt.mordant.rendering.TextColors.brightRed
 import org.apache.logging.log4j.kotlin.KotlinLogger
 
 
 fun <T> Result<T>.logResult(logger: KotlinLogger, operation: (T) -> String): Result<T> {
     return this
-        .onSuccess { logger.info("${operation(it)} - ${Color.LIGHT_GREEN("Success!")}") }
-        .onFailure { logger.error("${Color.LIGHT_RED("Failed!")} - " + it.message, it) }
+        .onSuccess { logger.info("${operation(it)} - ${brightGreen("Success!")}") }
+        .onFailure { logger.error("${brightRed("Failed!")} - " + it.message, it) }
 }
 
 
