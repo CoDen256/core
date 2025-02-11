@@ -7,7 +7,6 @@ import net.fortuna.ical4j.model.Calendar
 import net.fortuna.ical4j.model.component.VEvent
 import java.io.InputStream
 import java.net.URI
-import java.net.URL
 import java.time.ZonedDateTime
 
 class ICSAbsenceService(private val url: String) : AbsenceService {
