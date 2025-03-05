@@ -12,5 +12,7 @@
         <module>telegram</module>
         <module>utils</module>
         <module>database</module>
+        <module>spring-boot-starter-parent</module>
+        <module>parent</module>
     </modules>
 </project>
