@@ -28,14 +28,6 @@
             <url>https://repo1.maven.org/maven2/</url>
         </repository>
         <repository>
-            <id>jitpack</id>
-            <url>https://jitpack.io</url>
-        </repository>
-        <repository>
-            <id>jcenter</id>
-            <url>https://jcenter.bintray.com/</url>
-        </repository>
-        <repository>
             <id>github</id>
             <url>https://maven.pkg.github.com/CoDen256/core</url>
         </repository>
