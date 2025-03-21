@@ -13,6 +13,7 @@
         <module>utils</module>
         <module>parent</module>
         <module>telegram</module>
+        <module>database</module>
     </modules>
 
     <distributionManagement>
