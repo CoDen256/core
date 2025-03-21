@@ -5,9 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.coden</groupId>
-    <artifactId>root</artifactId>
+    <artifactId>modules</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
+
     <modules>
         <module>utils</module>
         <module>parent</module>
@@ -17,7 +18,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/CoDen256/core-libraries</url>
+            <url>https://maven.pkg.github.com/CoDen256/core</url>
         </repository>
     </distributionManagement>
 </project>
