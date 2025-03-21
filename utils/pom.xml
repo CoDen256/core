@@ -81,12 +81,4 @@
         </dependency>
     </dependencies>
 
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/coden256/core-utils</url>
-        </repository>
-    </distributionManagement>
-
 </project>
