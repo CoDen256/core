@@ -1,4 +1,4 @@
-package io.github.coden.database
+package io.github.coden256.database
 
 data class DatasourceConfig(
     val url: String,

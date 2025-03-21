@@ -1,4 +1,4 @@
-package io.github.coden.telegram.keyboard
+package io.github.coden256.telegram.keyboard
 
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton

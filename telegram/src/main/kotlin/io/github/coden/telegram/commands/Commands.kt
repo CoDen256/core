@@ -1,7 +1,7 @@
-package io.github.coden.telegram.commands
+package io.github.coden256.telegram.commands
 
-import io.github.coden.telegram.abilities.replyOnCallback
-import io.github.coden.utils.success
+import io.github.coden256.telegram.abilities.replyOnCallback
+import io.github.coden256.utils.success
 import org.apache.logging.log4j.kotlin.logger
 import org.telegram.abilitybots.api.objects.Reply
 import org.telegram.telegrambots.meta.api.objects.Update

@@ -1,4 +1,4 @@
-package io.github.coden.absence.api
+package io.github.coden256.absence.api
 
 import java.time.LocalDate
 

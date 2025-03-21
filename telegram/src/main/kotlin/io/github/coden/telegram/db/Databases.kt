@@ -1,4 +1,4 @@
-package io.github.coden.telegram.db
+package io.github.coden256.telegram.db
 
 import org.mapdb.DB
 import org.mapdb.DBMaker

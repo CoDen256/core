@@ -1,4 +1,4 @@
-package io.github.coden.telegram.abilities
+package io.github.coden256.telegram.abilities
 
 import org.apache.logging.log4j.kotlin.Logging
 import org.telegram.telegrambots.meta.generics.LongPollingBot

@@ -1,10 +1,10 @@
-package io.github.coden.telegram.abilities
+package io.github.coden256.telegram.abilities
 
-import io.github.coden.telegram.db.Chat
-import io.github.coden.telegram.db.Chat.Companion.asChat
-import io.github.coden.telegram.senders.silentSend
-import io.github.coden.telegram.senders.styled
-import io.github.coden.utils.notNullOrFailure
+import io.github.coden256.telegram.db.Chat
+import io.github.coden256.telegram.db.Chat.Companion.asChat
+import io.github.coden256.telegram.senders.silentSend
+import io.github.coden256.telegram.senders.styled
+import io.github.coden256.utils.notNullOrFailure
 import org.apache.logging.log4j.kotlin.logger
 import org.telegram.abilitybots.api.bot.BaseAbilityBot
 import org.telegram.abilitybots.api.objects.*

@@ -1,12 +1,12 @@
-package io.github.coden.telegram.senders
+package io.github.coden256.telegram.senders
 
-import io.github.coden.telegram.db.BotMessage
-import io.github.coden.telegram.db.BotMessage.Companion.asBot
-import io.github.coden.telegram.db.Chat
-import io.github.coden.telegram.db.Message
-import io.github.coden.telegram.keyboard.Keyboard
-import io.github.coden.telegram.keyboard.asInlineKeyboardMarkup
-import io.github.coden.utils.success
+import io.github.coden256.telegram.db.BotMessage
+import io.github.coden256.telegram.db.BotMessage.Companion.asBot
+import io.github.coden256.telegram.db.Chat
+import io.github.coden256.telegram.db.Message
+import io.github.coden256.telegram.keyboard.Keyboard
+import io.github.coden256.telegram.keyboard.asInlineKeyboardMarkup
+import io.github.coden256.utils.success
 import org.apache.logging.log4j.kotlin.logger
 import org.telegram.abilitybots.api.sender.MessageSender
 import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery

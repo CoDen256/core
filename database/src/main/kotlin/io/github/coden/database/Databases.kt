@@ -1,4 +1,4 @@
-package io.github.coden.database
+package io.github.coden256.database
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.Transaction
 import org.jetbrains.exposed.sql.transactions.transaction

@@ -1,4 +1,4 @@
-package io.github.coden.utils
+package io.github.coden256.utils
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.asCoroutineDispatcher

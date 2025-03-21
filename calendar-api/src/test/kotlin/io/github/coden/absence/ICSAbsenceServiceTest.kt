@@ -1,4 +1,4 @@
-package io.github.coden.absence
+package io.github.coden256.absence
 
 import org.junit.jupiter.api.Test
 

@@ -1,6 +1,6 @@
-package io.github.coden.telegram.abilities
+package io.github.coden256.telegram.abilities
 
-import io.github.coden.telegram.db.BotDB
+import io.github.coden256.telegram.db.BotDB
 import org.telegram.abilitybots.api.bot.AbilityBot
 import org.telegram.abilitybots.api.objects.Ability
 import org.telegram.abilitybots.api.util.AbilityUtils.EMPTY_USER

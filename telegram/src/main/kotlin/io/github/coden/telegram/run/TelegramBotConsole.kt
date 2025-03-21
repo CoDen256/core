@@ -1,8 +1,8 @@
-package io.github.coden.telegram.run
+package io.github.coden256.telegram.run
 
 
 import com.github.ajalt.mordant.rendering.TextColors
-import io.github.coden.telegram.abilities.RunnableLongPollingBot
+import io.github.coden256.telegram.abilities.RunnableLongPollingBot
 import org.apache.logging.log4j.kotlin.Logging
 import org.telegram.telegrambots.meta.TelegramBotsApi
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException

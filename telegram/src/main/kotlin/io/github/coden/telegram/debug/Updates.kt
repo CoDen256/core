@@ -1,8 +1,8 @@
-package io.github.coden.telegram.debug
+package io.github.coden256.telegram.debug
 
-import io.github.coden.telegram.abilities.chat
-import io.github.coden.telegram.db.Message
-import io.github.coden.telegram.db.OwnerMessage
+import io.github.coden256.telegram.abilities.chat
+import io.github.coden256.telegram.db.Message
+import io.github.coden256.telegram.db.OwnerMessage
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery
 import org.telegram.telegrambots.meta.api.objects.Chat
 import org.telegram.telegrambots.meta.api.objects.Update

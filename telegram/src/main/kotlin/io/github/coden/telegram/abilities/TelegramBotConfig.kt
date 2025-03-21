@@ -1,4 +1,4 @@
-package io.github.coden.telegram.abilities
+package io.github.coden256.telegram.abilities
 
 data class TelegramBotConfig (
     val token: String,

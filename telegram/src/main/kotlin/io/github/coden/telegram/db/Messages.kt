@@ -1,4 +1,4 @@
-package io.github.coden.telegram.db
+package io.github.coden256.telegram.db
 
 import org.telegram.telegrambots.meta.api.objects.MaybeInaccessibleMessage
 import java.io.Serializable

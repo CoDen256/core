@@ -1,9 +1,9 @@
-package io.github.coden.telegram.abilities
+package io.github.coden256.telegram.abilities
 
-import io.github.coden.telegram.commands.CallbackCommand
-import io.github.coden.telegram.commands.CommandSerializer
-import io.github.coden.telegram.commands.replyOnCallbackCommand
-import io.github.coden.telegram.db.BotDB
+import io.github.coden256.telegram.commands.CallbackCommand
+import io.github.coden256.telegram.commands.CommandSerializer
+import io.github.coden256.telegram.commands.replyOnCallbackCommand
+import io.github.coden256.telegram.db.BotDB
 import org.telegram.telegrambots.bots.DefaultBotOptions
 import org.telegram.telegrambots.meta.api.objects.Update
 

@@ -1,4 +1,4 @@
-package io.github.coden.utils
+package io.github.coden256.utils
 
 import com.github.ajalt.mordant.rendering.TextColors
 import org.apache.commons.lang3.RandomStringUtils

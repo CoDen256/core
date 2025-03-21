@@ -1,4 +1,4 @@
-package io.github.coden.utils
+package io.github.coden256.utils
 
 import com.github.ajalt.mordant.rendering.TextColors.brightGreen
 import com.github.ajalt.mordant.rendering.TextColors.brightRed

@@ -1,4 +1,4 @@
-package io.github.coden.telegram.senders
+package io.github.coden256.telegram.senders
 
 data class StyledString(
     val text: String,

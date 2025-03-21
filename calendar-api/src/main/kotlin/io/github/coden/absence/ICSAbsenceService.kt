@@ -1,7 +1,7 @@
-package io.github.coden.absence
+package io.github.coden256.absence
 
-import io.github.coden.absence.api.AbsenceService
-import io.github.coden.absence.api.OutOfOffice
+import io.github.coden256.absence.api.AbsenceService
+import io.github.coden256.absence.api.OutOfOffice
 import net.fortuna.ical4j.data.CalendarBuilder
 import net.fortuna.ical4j.model.Calendar
 import net.fortuna.ical4j.model.component.VEvent

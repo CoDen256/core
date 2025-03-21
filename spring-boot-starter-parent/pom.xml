@@ -10,7 +10,7 @@
         <relativePath></relativePath>
     </parent>
 
-    <groupId>io.github.coden</groupId>
+    <groupId>io.github.coden256</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
@@ -62,7 +62,7 @@
                     <generator>
                         <name>org.jooq.codegen.KotlinGenerator</name>
                         <target>
-                            <packageName>io.github.coden.persist.generated</packageName>
+                            <packageName>io.github.coden256.persist.generated</packageName>
                             <directory>src/main/kotlin</directory>
                         </target>
                         <generate>
@@ -99,7 +99,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.github.coden</groupId>
+            <groupId>io.github.coden256</groupId>
             <artifactId>core-utils</artifactId>
             <version>1.6</version>
         </dependency>
