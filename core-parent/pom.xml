@@ -22,6 +22,7 @@
         <kotlin.version>1.9.23</kotlin.version>
     </properties>
 
+
     <dependencies>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>

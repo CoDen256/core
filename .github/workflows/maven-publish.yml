@@ -77,7 +77,7 @@ jobs:
         if: steps.changed-modules.outputs.changed_modules != ''
         run: |
           # Install all modules first to ensure dependencies are available
-          mvn -B install -DskipTests
+          mvn -B install
           
           # Build and deploy only changed modules and their dependencies
           mvn -B deploy -pl ${{ steps.changed-modules.outputs.changed_modules }} -am \
