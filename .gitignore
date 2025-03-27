@@ -1,4 +1,4 @@
 /telegram/target/
-/utils/target/
+/core-utils/target/
 /database/target/
 .idea

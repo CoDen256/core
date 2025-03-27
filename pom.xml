@@ -15,5 +15,7 @@
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
-    <modules></modules>
+    <modules>
+        <module>core-parent</module>
+    </modules>
 </project>
