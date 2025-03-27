@@ -47,6 +47,7 @@ jobs:
           
           # Initialize array for changed modules
           changed_modules=()
+          changed_modules+=("!.")
           
           # Check each pom.xml to see if it or its directory contents changed
           for pom in $all_poms; do
