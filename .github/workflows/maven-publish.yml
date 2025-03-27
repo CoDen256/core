@@ -31,7 +31,7 @@ jobs:
         id: changed-modules
         run: |
           # Get list of changed files
-          changed_files=$(git diff --name-only HEAD^ HEAD)
+          changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }})
           
           # Find all pom.xml files in the project
           all_poms=$(find . -name 'pom.xml' | sort)
