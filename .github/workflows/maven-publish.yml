@@ -27,6 +27,19 @@ jobs:
           distribution: 'temurin'
           server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
           settings-path: ${{ github.workspace }} # location for the settings.xml file
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@823fcebdb31bb35fdf2229d9f769b400309430d0 # v46
+          # To compare changes between the current commit and the last pushed remote commit set `since_last_remote_commit: true`. e.g
+          # with:
+          #   since_last_remote_commit: true 
+      - name: List all changed files
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+        run: |
+          for file in ${ALL_CHANGED_FILES}; do
+            echo "$file was changed"
+          done
       - name: Identify changed modules
         id: changed-modules
         run: |
