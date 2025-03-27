@@ -41,9 +41,6 @@ jobs:
           # Get list of changed files
           changed_files=$(echo $ALL_CHANGED_FILES | sed 's/ / \.\//g; s/^/\.\//' | tr ' ' '\n')
           echo "$changed_files"
-          for file in $ALL_CHANGED_FILES; do
-            echo "$file was changed"
-          done
           
           # Find all pom.xml files in the project
           all_poms=$(find . -name 'pom.xml' | sort)
@@ -54,13 +51,13 @@ jobs:
           # Check each pom.xml to see if it or its directory contents changed
           for pom in $all_poms; do
             module_dir=$(dirname "$pom")
-            echo "checking $pom: in $module_dir"          
+            echo "checking $pom in $module_dir"          
             # Check if this module's files were changed
-            if echo "$changed_files" | grep -q "^$module_dir/"; then
+            if echo "$changed_files" | grep -q "^$pom$"; then
               # Extract artifactId from pom.xml
               artifactId=$module_dir
-              echo "$artifactId"
-              changed_modules+=(":$artifactId")
+              echo "Changed! $artifactId"
+              changed_modules+=("$artifactId")
             fi
           done
           
