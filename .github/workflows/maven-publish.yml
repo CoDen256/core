@@ -39,7 +39,7 @@ jobs:
           ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
           # Get list of changed files
-          changed_files=$(ALL_CHANGED_FILES)
+          changed_files=$ALL_CHANGED_FILES
           for file in ${changed_files}; do
             echo "$file was changed"
           done
