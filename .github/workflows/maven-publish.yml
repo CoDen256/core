@@ -8,7 +8,7 @@ on:
     branches:
       - master
   release:
-    types: [created]
+    types: [ created ]
 
 jobs:
   build:
@@ -30,7 +30,7 @@ jobs:
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@823fcebdb31bb35fdf2229d9f769b400309430d0 # v46
-          # To compare changes between the current commit and the last pushed remote commit set `since_last_remote_commit: true`. e.g
+        # To compare changes between the current commit and the last pushed remote commit set `since_last_remote_commit: true`. e.g
         with:
           since_last_remote_commit: true
       - name: Identify changed modules
@@ -54,10 +54,10 @@ jobs:
             echo "checking $pom in $module_dir"          
             # Check if this module's files were changed
             if echo "$changed_files" | grep -q "^$pom$"; then
-              # Extract artifactId from pom.xml
-              artifactId=$module_dir
-              echo "Changed! $artifactId"
-              changed_modules+=("$artifactId")
+              if [ "$module_dir" != "." ]; then
+                echo "Changed module! $module_dir"
+                changed_modules+=("$module_dir")
+              fi
             fi
           done
           
