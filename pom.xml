@@ -4,23 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.coden256</groupId>
-    <artifactId>modules</artifactId>
-    <version>1.0.1</version>
+    <parent>
+        <groupId>io.github.coden256</groupId>
+        <artifactId>distribution-parent</artifactId>
+        <version>1.0</version>
+        <relativePath>distribution-parent</relativePath>
+    </parent>
+
+    <artifactId>core-aggregator</artifactId>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
 
-    <modules>
-        <module>utils</module>
-        <module>parent</module>
-        <module>telegram</module>
-        <module>database</module>
-    </modules>
-
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/CoDen256/core</url>
-        </repository>
-    </distributionManagement>
+    <modules></modules>
 </project>
