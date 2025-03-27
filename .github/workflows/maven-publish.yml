@@ -31,20 +31,18 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@823fcebdb31bb35fdf2229d9f769b400309430d0 # v46
           # To compare changes between the current commit and the last pushed remote commit set `since_last_remote_commit: true`. e.g
-          # with:
-          #   since_last_remote_commit: true 
-      - name: List all changed files
+        with:
+          since_last_remote_commit: true
+      - name: Identify changed modules
+        id: changed-modules
         env:
           ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
-          for file in ${ALL_CHANGED_FILES}; do
+          # Get list of changed files
+          changed_files=$(ALL_CHANGED_FILES)
+          for file in ${changed_files}; do
             echo "$file was changed"
           done
-      - name: Identify changed modules
-        id: changed-modules
-        run: |
-          # Get list of changed files
-          changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }})
           
           # Find all pom.xml files in the project
           all_poms=$(find . -name 'pom.xml' | sort)
