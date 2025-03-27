@@ -27,11 +27,55 @@ jobs:
           distribution: 'temurin'
           server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
           settings-path: ${{ github.workspace }} # location for the settings.xml file
+      - name: Identify changed modules
+        id: changed-modules
+        run: |
+          # Get list of changed files
+          changed_files=$(git diff --name-only HEAD^ HEAD)
+          
+          # Find all pom.xml files in the project
+          all_poms=$(find . -name 'pom.xml' | sort)
+          
+          # Initialize array for changed modules
+          changed_modules=()
+          
+          # Check each pom.xml to see if it or its directory contents changed
+          for pom in $all_poms; do
+            module_dir=$(dirname "$pom")
+            # Check if this module's files were changed
+            if echo "$changed_files" | grep -q "^$module_dir/"; then
+              # Extract artifactId from pom.xml
+              artifactId=$(xmllint --xpath '/*[local-name()="project"]/*[local-name()="artifactId"]/text()' "$pom")
+              changed_modules+=(":$artifactId")
+            fi
+          done
+          
+          # Convert array to comma-separated string
+          modules_csv=$(IFS=, ; echo "${changed_modules[*]}")
+          
+          # Set output for next steps
+          if [ -z "$modules_csv" ]; then
+            echo "No modules changed"
+            echo "changed_modules=" >> $GITHUB_OUTPUT
+          else
+            echo "Changed modules: $modules_csv"
+            echo "changed_modules=$modules_csv" >> $GITHUB_OUTPUT
+          fi
 
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
-
-      - name: Publish to GitHub Packages Apache Maven
-        run: mvn deploy -U -Prelease -DaltDeploymentRepository=github::https://maven.pkg.github.com/CoDen256/core -s $GITHUB_WORKSPACE/settings.xml
+      - name: Build and publish changed modules
+        if: steps.changed-modules.outputs.changed_modules != ''
+        run: |
+          # Install all modules first to ensure dependencies are available
+          mvn -B install -DskipTests
+          
+          # Build and deploy only changed modules and their dependencies
+          mvn -B deploy -pl ${{ steps.changed-modules.outputs.changed_modules }} -am \
+              -DskipTests \
+              -DaltDeploymentRepository=github::https://maven.pkg.github.com/CoDen256/core \
+              -s $GITHUB_WORKSPACE/settings.xml
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Skip build when no modules changed
+        if: steps.changed-modules.outputs.changed_modules == ''
+        run: echo "No modules were changed, skipping build"
