@@ -39,8 +39,9 @@ jobs:
           ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
           # Get list of changed files
-          changed_files=$ALL_CHANGED_FILES
-          for file in ${changed_files}; do
+          changed_files=$(echo $ALL_CHANGED_FILES | sed 's/ / \.\//g; s/^/\.\//' | tr ' ' '\n')
+          echo "$changed_files"
+          for file in $ALL_CHANGED_FILES; do
             echo "$file was changed"
           done
           
@@ -53,10 +54,12 @@ jobs:
           # Check each pom.xml to see if it or its directory contents changed
           for pom in $all_poms; do
             module_dir=$(dirname "$pom")
+            echo "checking $pom: in $module_dir"          
             # Check if this module's files were changed
             if echo "$changed_files" | grep -q "^$module_dir/"; then
               # Extract artifactId from pom.xml
-              artifactId=$(xmllint --xpath '/*[local-name()="project"]/*[local-name()="artifactId"]/text()' "$pom")
+              artifactId=$module_dir
+              echo "$artifactId"
               changed_modules+=(":$artifactId")
             fi
           done

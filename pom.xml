@@ -11,6 +11,7 @@
         <relativePath>distribution-parent</relativePath>
     </parent>
 
+
     <artifactId>core-aggregator</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
