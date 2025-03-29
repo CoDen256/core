@@ -6,9 +6,9 @@
 
     <parent>
         <groupId>io.github.coden256.lib</groupId>
-        <artifactId>parent</artifactId>
-        <version>1.0</version>
-        <relativePath>../parent</relativePath>
+        <artifactId>lib-parent</artifactId>
+        <version>0.0</version>
+        <relativePath>../lib-parent</relativePath>
     </parent>
 
     <artifactId>calendar-api</artifactId>
