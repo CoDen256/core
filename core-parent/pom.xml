@@ -7,12 +7,12 @@
     <parent>
         <groupId>io.github.coden256</groupId>
         <artifactId>distribution-parent</artifactId>
-        <version>0.0</version>
+        <version>1.0</version>
         <relativePath>../distribution-parent</relativePath>
     </parent>
 
     <artifactId>core-parent</artifactId>
-    <version>1.0</version>
+    <version>0.0</version>
     <packaging>pom</packaging>
 
     <properties>
