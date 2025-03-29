@@ -16,6 +16,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>distribution-parent</module>
         <module>core-parent</module>
         <module>core-utils</module>
     </modules>
