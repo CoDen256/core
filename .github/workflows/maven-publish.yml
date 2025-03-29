@@ -84,8 +84,8 @@ jobs:
         continue-on-error: true
 
   build:
-    if: false
     runs-on: ubuntu-latest
+    needs: clean
     permissions:
       contents: read
       packages: write
