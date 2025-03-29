@@ -22,7 +22,6 @@
         <kotlin.version>1.9.23</kotlin.version>
     </properties>
 
-
     <dependencies>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
@@ -75,6 +74,21 @@
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>3.2.2</version>
+            </plugin>
+            <!-- Generate sources JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
