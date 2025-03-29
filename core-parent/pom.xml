@@ -4,9 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Used as parent to library projects and as parent to target apps    -->
     <groupId>io.github.coden256</groupId>
     <artifactId>core-parent</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -19,6 +20,7 @@
     </properties>
 
     <dependencyManagement>
+        <!-- Dependencies to select in the inherited projects, not used by default -->
         <dependencies>
             <dependency>
                 <groupId>io.github.coden256</groupId>
@@ -125,6 +127,7 @@
         <sourceDirectory>src/main/kotlin</sourceDirectory>
         <testSourceDirectory>src/test/kotlin</testSourceDirectory>
         <plugins>
+            <!-- For target apps and libraries to compile -->
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
@@ -154,7 +157,7 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>3.2.2</version>
             </plugin>
-            <!-- Generate sources JAR -->
+            <!-- For libraries to Generate sources JAR -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -170,5 +173,61 @@
                 </executions>
             </plugin>
         </plugins>
+
+        <!-- Plugins to select in the inherited projects, not used by default -->
+        <pluginManagement>
+            <plugins>
+                <!-- For target apps to build an executable jar -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>2.6</version>
+                    <executions>
+                        <execution>
+                            <id>make-assembly</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>single</goal>
+                            </goals>
+                            <configuration>
+                                <archiveBaseDirectory>${project.basedir}</archiveBaseDirectory>
+                                <archive>
+                                    <manifest>
+                                        <!--suppress UnresolvedMavenProperty -->
+                                        <mainClass>${mainClass}</mainClass>
+                                    </manifest>
+                                </archive>
+                                <descriptorRefs>
+                                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                                </descriptorRefs>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!-- For target apps to push to docker hub -->
+                <plugin>
+                    <groupId>com.google.cloud.tools</groupId>
+                    <artifactId>jib-maven-plugin</artifactId>
+                    <version>3.4.5</version>
+                    <configuration>
+                        <to>
+                            <image>coden256/${project.artifactId}</image>
+                            <tags>
+                                <tag>${project.version}</tag>
+                                <tag>latest</tag>
+                            </tags>
+                        </to>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>build</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 </project>
