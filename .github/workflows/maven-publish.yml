@@ -76,7 +76,7 @@ jobs:
           operation: deletePackageVersions
           user: ${{ github.repository_owner }}
           package_type: maven
-          package_name: ${{ matrix.name }}
+          package_name: io.github.coden256.${{ matrix.name }}
           include: name ${{ matrix.version }}
           summary: true
           debug: true
