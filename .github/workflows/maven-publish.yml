@@ -31,15 +31,7 @@ jobs:
       contents: read
       packages: write
     strategy:
-      matrix:
-        include:
-          - name: 'package1'
-            version: '1.0.0'
-          - name: 'package2'
-            version: '2.3.4'
-          - name: 'package3'
-            version: '5.6.7'
-
+      matrix:  ${{ fromJSON(needs.fetch-versions.outputs.matrix) }}
     steps:
       - name: Build package
         run: |
