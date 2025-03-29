@@ -28,7 +28,7 @@ jobs:
       - name: Get module versions
         id: fetch
         run: |
-          ROOT_VERSION=$(awk '/<version>/{i++}i==2{print; exit}' "$module/pom.xml" | 's/<version>//;s/<\/version>//;s/^[[:space:]]*//;s/[[:space:]]*$//')
+          ROOT_VERSION=$(awk '/<version>/{i++}i==2{print; exit}' "./pom.xml" | sed 's/<version>//;s/<\/version>//;s/^[[:space:]]*//;s/[[:space:]]*$//')
           RESULTS=("{\"name\":\"core-aggregator\",\"version\":\"$ROOT_VERSION\"}")
     
           MODULES_JSON='${{ steps.pom-modules.outputs.modules }}'
