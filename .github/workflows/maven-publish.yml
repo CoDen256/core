@@ -30,12 +30,14 @@ jobs:
     permissions:
       contents: read
       packages: write
-    strategy:
-      matrix:
-        item: ${{ fromJSON(needs.fetch-versions.outputs.matrix) }}
+#    strategy:
+#      matrix:
+#        item: ${{ fromJSON(needs.fetch-versions.outputs.matrix) }}
     steps:
       - name: Build package
         run: |
+          echo "${{ needs.fetch-versions.outputs.matrix }}"
+          echo "${{ fromJSON(needs.fetch-versions.outputs.matrix) }}"
           echo "Building ${{ matrix.name }} version ${{ matrix.version }}"
           # Your build commands here
 
