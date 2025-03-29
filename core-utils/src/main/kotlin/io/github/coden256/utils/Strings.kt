@@ -7,16 +7,16 @@ import java.util.concurrent.ThreadLocalRandom
 fun randomPronouncable(min: Int, max: Int): String{
     val current = ThreadLocalRandom.current()
     val result = RandomStringUtils.random(    current.nextInt(min, 2*max),
-        vowels.repeat(current.nextInt(10)) + consontants.repeat(current.nextInt(3))
+        vowels.repeat(current.nextInt(10)) + consonants.repeat(current.nextInt(3))
     ).lowercase()
     return result
         .replace(Regex("([$vowels]{2})(?=([$vowels]))")){it.groupValues[1]+ randomConsonant() }
-        .replace(Regex("([$consontants]{2})(?=([$consontants]))")){it.groupValues[1]+ randomVowel() }
+        .replace(Regex("([$consonants]{2})(?=([$consonants]))")){it.groupValues[1]+ randomVowel() }
         .take(max)
 }
 
 const val vowels = "aeiou"
-const val consontants = "bcdfghjklmnpqrstvwxyz"
+const val consonants = "bcdfghjklmnpqrstvwxyz"
 
 fun String.lastVowel(): Boolean{
     return this.lastOrNull()?.let { vowels.contains(it) } == true
@@ -27,7 +27,7 @@ fun randomVowel(): String{
 }
 
 fun randomConsonant(): String{
-    return RandomStringUtils.random(1, consontants)
+    return RandomStringUtils.random(1, consonants)
 }
 
 fun randomNumber(): String{
