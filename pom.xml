@@ -12,5 +12,6 @@
     <modules>
         <module>core-parent</module>
         <module>core-utils</module>
+        <module>core-telegram</module>
     </modules>
 </project>
