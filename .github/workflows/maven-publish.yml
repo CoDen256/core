@@ -20,18 +20,40 @@ jobs:
       - name: Extract modules from pom.xml
         id: pom-modules
         run: |
-          # Extract modules and format as JSON array
           cat pom.xml
           MODULES=$(grep '<module>' pom.xml | sed 's/<module>//g; s/<\/module>//g; s/^[[:space:]]*//g' | jq -R -s -c 'split("\n") | map(select(. != ""))')
-
-          # Output the result
           echo "modules=${MODULES}" >> $GITHUB_OUTPUT
           echo "Extracted modules: ${MODULES}"
         continue-on-error: true
-      - id: fetch
+      - name: Get module versions
+        id: fetch
         run: |
-          # This could come from a file, API call, etc.
-          MATRIX_JSON='{"include":[{"name":"io.github.coden256.core-aggregator","version":"1.0.0"},{"name":"io.github.coden256.core-parent","version":"1.0"}]}'
+          MODULES_JSON='${{ steps.pom-modules.outputs.modules }}'
+          MODULES=($(echo "$MODULES_JSON" | jq -r '.[]'))
+          
+          # Initialize results
+          RESULTS=()
+          
+          for module in "${MODULES[@]}"; do
+            if [ -f "$module/pom.xml" ]; then
+              # Get the SECOND version tag (skip parent version)
+              version=$(awk '/<version>/{i++}i==2{print; exit}' "$module/pom.xml" | \
+              sed 's/<version>//;s/<\/version>//;s/^[[:space:]]*//;s/[[:space:]]*$//')
+              
+              # Fallback to first version if only one exists
+              if [ -z "$version" ]; then
+                version=$(grep -m1 '<version>' "$module/pom.xml" | \
+                sed 's/<version>//;s/<\/version>//;s/^[[:space:]]*//;s/[[:space:]]*$//')
+              fi
+              RESULTS+=("{\"name\":\"$module\",\"version\":\"$version\"}")
+            else
+              echo "Warning: $module/pom.xml not found"
+            fi
+          done
+          
+          # Create JSON output
+          MATRIX_JSON=$(printf '{"include":[%s]}' "$(IFS=,; echo "${RESULTS[*]}")")
+          
           echo $MATRIX_JSON
           echo "matrix=$MATRIX_JSON" >> $GITHUB_OUTPUT
 
