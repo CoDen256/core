@@ -29,7 +29,7 @@ jobs:
         id: fetch
         run: |
           ROOT_VERSION=$(awk '/<version>/{i++}i==2{print; exit}' "./pom.xml" | sed 's/<version>//;s/<\/version>//;s/^[[:space:]]*//;s/[[:space:]]*$//')
-          RESULTS=("{\"name\":\"core-aggregator\",\"version\":\"$ROOT_VERSION\"}")
+          RESULTS=("{\"name\":\"io.github.coden256.core-aggregator\",\"version\":\"$ROOT_VERSION\"}")
     
           MODULES_JSON='${{ steps.pom-modules.outputs.modules }}'
           MODULES=($(echo "$MODULES_JSON" | jq -r '.[]'))
@@ -45,7 +45,7 @@ jobs:
                 version=$(grep -m1 '<version>' "$module/pom.xml" | \
                 sed 's/<version>//;s/<\/version>//;s/^[[:space:]]*//;s/[[:space:]]*$//')
               fi
-              RESULTS+=("{\"name\":\"$module\",\"version\":\"$version\"}")
+              RESULTS+=("{\"name\":\"io.github.coden256.$module\",\"version\":\"$version\"}")
             else
               echo "Warning: $module/pom.xml not found"
             fi
@@ -76,7 +76,7 @@ jobs:
           operation: deletePackageVersions
           user: ${{ github.repository_owner }}
           package_type: maven
-          package_name: io.github.coden256.${{ matrix.name }}
+          package_name: ${{ matrix.name }}
           include: name ${{ matrix.version }}
           summary: true
           debug: true
