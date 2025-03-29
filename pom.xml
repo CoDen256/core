@@ -4,19 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>io.github.coden256</groupId>
-        <artifactId>distribution-parent</artifactId>
-        <version>1.0</version>
-        <relativePath>distribution-parent</relativePath>
-    </parent>
-
+    <groupId>io.github.coden256</groupId>
     <artifactId>core-aggregator</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>distribution-parent</module>
         <module>core-parent</module>
         <module>core-utils</module>
     </modules>
