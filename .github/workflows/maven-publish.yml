@@ -35,7 +35,7 @@ jobs:
         with:
           package-name: 'io.github.coden256.core-aggregator'
           package-type: 'maven'
-          package-version-ids: "1.0.0"
+          package-version-ids: 2451337
 
       - name: Publish to GitHub Packages Apache Maven
         run: mvn deploy -U -Prelease -DaltDeploymentRepository=github::https://maven.pkg.github.com/CoDen256/core -s $GITHUB_WORKSPACE/settings.xml
