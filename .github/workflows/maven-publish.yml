@@ -11,12 +11,25 @@ on:
     types: [created]
 
 jobs:
-
   fetch-versions:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.fetch.outputs.matrix }}
     steps:
+      - uses: actions/checkout@v4
+      - name: Extract modules from pom.xml
+        id: pom-modules
+        run: |
+          # Install xmlstarlet for XML parsing (if not already available)
+          sudo apt-get install -y xmlstarlet
+
+          # Extract modules and format as JSON array
+          MODULES_JSON=$(xmlstarlet sel -t -v "//modules/module" -n pom.xml | jq -R -s -c 'split("\n") | map(select(. != ""))')
+
+          # Output the result
+          echo "modules=${MODULES_JSON}" >> $GITHUB_OUTPUT
+          echo "Extracted modules: ${MODULES_JSON}"
+        continue-on-error: true
       - id: fetch
         run: |
           # This could come from a file, API call, etc.

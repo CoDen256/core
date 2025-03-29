@@ -16,6 +16,6 @@
     <packaging>pom</packaging>
 
     <modules>
-<!--        <module>core-parent</module>-->
+        <module>core-parent</module>
     </modules>
 </project>
