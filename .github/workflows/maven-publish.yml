@@ -19,6 +19,18 @@ jobs:
       packages: write
 
     steps:
+      - name: Org owned packages
+        uses: shaneapowell/ghaction-package-admin@v0
+        with:
+          ghtoken: ${{ github.token }}
+          operation: deletePackageVersions
+          user: ${{ github.repository_owner }}
+          package_type: maven
+          package_name:  io.github.coden256.core-aggregator
+          include: name 1.0.0
+          summary: true
+          debug: true
+          dryrun: false
       - uses: actions/checkout@v4
       - name: Set up JDK 21
         uses: actions/setup-java@v4
