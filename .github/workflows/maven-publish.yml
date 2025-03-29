@@ -30,12 +30,14 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-      - uses: actions/delete-package-versions@v5
-        name: Delete packages before publishing
+      - name: Delete SNAPSHOT packages
+        uses: Savrov/github-action-version-cleaner@v1.0.0
         with:
-          package-name: 'io.github.coden256.core-aggregator'
-          package-type: 'maven'
-          package-version-ids: 2451337
+          github-repository: ${{ github.repository }}
+          package-type: maven
+          version-tag: 1.0.0
+          is-version-tag-strict: true
+          github-token: ${{ secrets.DELETE_PACKAGES_TOKEN }}
 
       - name: Publish to GitHub Packages Apache Maven
         run: mvn deploy -U -Prelease -DaltDeploymentRepository=github::https://maven.pkg.github.com/CoDen256/core -s $GITHUB_WORKSPACE/settings.xml
