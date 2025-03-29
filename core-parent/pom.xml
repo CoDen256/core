@@ -25,6 +25,16 @@
                 <artifactId>core-utils</artifactId>
                 <version>1.0</version>
             </dependency>
+            <dependency>
+                <groupId>io.github.coden256</groupId>
+                <artifactId>core-telegram</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.coden256</groupId>
+                <artifactId>core-database</artifactId>
+                <version>1.0</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.jetbrains.kotlinx</groupId>
