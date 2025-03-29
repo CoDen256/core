@@ -37,7 +37,7 @@ jobs:
         id: fetch
         run: |
           ROOT_VERSION=$(grep -m1 '^    <version>' "./pom.xml" | sed 's/<version>//;s/<\/version>//;s/^[[:space:]]*//;s/[[:space:]]*$//')
-          RESULTS=("{\"name\":\"core-aggregator\",\"version\":\"$ROOT_VERSION\"}")
+          RESULTS=("{\"name\":\"aggregator\",\"version\":\"$ROOT_VERSION\"}")
     
           MODULES_JSON='${{ steps.pom-modules.outputs.modules }}'
           MODULES=($(echo "$MODULES_JSON" | jq -r '.[]'))
@@ -46,7 +46,8 @@ jobs:
             if [ -f "$module/pom.xml" ]; then
               # Get the SECOND version tag (skip parent version)
               version=$(grep -m1 '^    <version>' "$module/pom.xml" | sed 's/<version>//;s/<\/version>//;s/^[[:space:]]*//;s/[[:space:]]*$//')
-              RESULTS+=("{\"name\":\"$module\",\"version\":\"$version\"}")
+              artifact=$(echo "$module" | tr '/' '.')
+              RESULTS+=("{\"name\":\"$artifact\",\"version\":\"$version\"}")
             else
               echo "Warning: $module/pom.xml not found"
             fi

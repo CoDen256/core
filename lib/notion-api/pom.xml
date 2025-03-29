@@ -7,7 +7,7 @@
         <groupId>io.github.coden256</groupId>
         <artifactId>core-parent</artifactId>
         <version>1.1.0</version>
-        <relativePath>../parent</relativePath>
+        <relativePath>../../parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>core-notion</artifactId>

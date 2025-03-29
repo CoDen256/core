@@ -6,8 +6,8 @@
 
     <!-- Used as parent to library projects and as direct parent to target apps    -->
     <groupId>io.github.coden256</groupId>
-    <artifactId>core-parent</artifactId>
-    <version>1.1</version>
+    <artifactId>parent</artifactId>
+    <version>1.0</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -68,22 +68,22 @@
 
             <!-- Core library dependencies -->
             <dependency>
-                <groupId>io.github.coden256</groupId>
-                <artifactId>core-utils</artifactId>
+                <groupId>io.github.coden256.lib</groupId>
+                <artifactId>utils</artifactId>
                 <version>1.0</version>
             </dependency>
             <dependency>
-                <groupId>io.github.coden256</groupId>
-                <artifactId>core-telegram</artifactId>
+                <groupId>io.github.coden256.lib</groupId>
+                <artifactId>telegram</artifactId>
                 <version>1.0</version>
             </dependency>
             <dependency>
-                <groupId>io.github.coden256</groupId>
-                <artifactId>core-database</artifactId>
+                <groupId>io.github.coden256.lib</groupId>
+                <artifactId>database</artifactId>
                 <version>1.0</version>
             </dependency>
             <dependency>
-                <groupId>io.github.coden256</groupId>
+                <groupId>io.github.coden256.lib</groupId>
                 <artifactId>calendar-api</artifactId>
                 <version>1.0</version>
             </dependency>

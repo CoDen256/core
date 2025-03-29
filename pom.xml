@@ -5,19 +5,25 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.coden256</groupId>
-    <artifactId>core-aggregator</artifactId>
-    <version>1.0.0</version>
+    <artifactId>aggregator</artifactId>
+    <version>1.0</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>core-parent</module>
-        <!-- Core libraries + utilities    -->
-        <module>core-libraries-parent</module>
-        <module>core-utils</module>
-        <module>core-telegram</module>
-        <module>core-database</module>
+        <module>parent</module>
+        <module>spring-parent</module>
+        <module>lib/parent</module>
+        <module>lib/spring-parent</module>
 
-        <!-- SDK's and APIs connectors to the foreign services  -->
-        <module>calendar-api</module>
+        <!-- Core libraries + utilities    -->
+        <module>lib/utils</module>
+        <module>lib/telegram</module>
+        <module>lib/database</module>
+
+        <!-- SDKs and API connectors to the foreign services  -->
+        <module>lib/calendar-api</module>
+
+        <!-- SDKs and API spring connectors to the foreign services (spring-boot-starter)  -->
+
     </modules>
 </project>

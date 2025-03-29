@@ -1,6 +1,5 @@
 package io.github.coden256.telegram.debug
 
-import io.github.coden256.telegram.abilities.chat
 import io.github.coden256.telegram.db.Message
 import io.github.coden256.telegram.db.OwnerMessage
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery
