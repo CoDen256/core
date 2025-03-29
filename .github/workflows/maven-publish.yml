@@ -31,7 +31,7 @@ jobs:
         run: mvn -B package --file pom.xml
 
       - name: Delete SNAPSHOT packages
-        uses: Savrov/github-action-version-cleaner@v1.0.0
+        uses: Savrov/action-version-cleaner@v1.0.0
         with:
           github-repository: ${{ github.repository }}
           package-type: maven
