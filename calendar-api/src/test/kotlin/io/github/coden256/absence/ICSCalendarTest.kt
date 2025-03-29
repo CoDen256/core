@@ -2,11 +2,11 @@ package io.github.coden256.absence
 
 import org.junit.jupiter.api.Test
 
-class ICSAbsenceServiceTest {
+class ICSCalendarTest {
 
     @Test
-    fun getAbsences() {
-        val absences = ICSAbsenceService("")
+    fun privateEvents() {
+        val absences = ICSCalendar("")
 
         // setup
 

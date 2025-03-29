@@ -1,7 +1,6 @@
 package io.github.coden256.absence
 
-import io.github.coden256.absence.api.AbsenceService
-import io.github.coden256.absence.api.OutOfOffice
+import io.github.coden256.absence.api.Absence
 import net.fortuna.ical4j.data.CalendarBuilder
 import net.fortuna.ical4j.model.Calendar
 import net.fortuna.ical4j.model.component.VEvent
@@ -9,10 +8,9 @@ import java.io.InputStream
 import java.net.URI
 import java.time.ZonedDateTime
 
-class ICSAbsenceService(private val url: String) : AbsenceService {
-    override fun getAbsences(): List<OutOfOffice> {
+class ICSCalendar(private val url: String) : io.github.coden256.absence.api.Calendar {
+    override fun absences(): List<Absence> {
         val calendar = fetchCalendar()
-
         return calendar
             .getComponents<VEvent>()
             .filterIsInstance<VEvent>()
@@ -25,10 +23,10 @@ class ICSAbsenceService(private val url: String) : AbsenceService {
                 }
             }.filter { it.summary.value.contains("Private") }
             .map {
-                OutOfOffice(
+                Absence(
                     it.summary.value,
-                    it.getDateTimeStart<ZonedDateTime>().date.toLocalDate(),
-                    it.getDateTimeEnd<ZonedDateTime>().date.toLocalDate()
+                    it.getDateTimeStart<ZonedDateTime>().date.toLocalDateTime(),
+                    it.getDateTimeEnd<ZonedDateTime>().date.toLocalDateTime()
                 )
             }
     }
