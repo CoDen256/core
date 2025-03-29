@@ -14,7 +14,7 @@
     <!-- Used as parent to library projects -->
     <groupId>io.github.coden256.lib</groupId>
     <artifactId>lib-parent</artifactId>
-    <version>0.0</version>
+    <version>1.0</version>
     <packaging>pom</packaging>
 
     <build>
