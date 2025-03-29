@@ -36,8 +36,8 @@ jobs:
       - name: Get module versions
         id: fetch
         run: |
-          ROOT_VERSION=$(awk '/<version>/{i++}i==2{print; exit}' "./pom.xml" | sed 's/<version>//;s/<\/version>//;s/^[[:space:]]*//;s/[[:space:]]*$//')
-          RESULTS=("{\"name\":\"io.github.coden256.core-aggregator\",\"version\":\"$ROOT_VERSION\"}")
+          ROOT_VERSION=$(grep -m1 '^    <version>' "./pom.xml" | sed 's/<version>//;s/<\/version>//;s/^[[:space:]]*//;s/[[:space:]]*$//')
+          RESULTS=("{\"name\":\"core-aggregator\",\"version\":\"$ROOT_VERSION\"}")
     
           MODULES_JSON='${{ steps.pom-modules.outputs.modules }}'
           MODULES=($(echo "$MODULES_JSON" | jq -r '.[]'))
@@ -45,15 +45,8 @@ jobs:
           for module in "${MODULES[@]}"; do
             if [ -f "$module/pom.xml" ]; then
               # Get the SECOND version tag (skip parent version)
-              version=$(awk '/<version>/{i++}i==2{print; exit}' "$module/pom.xml" | \
-              sed 's/<version>//;s/<\/version>//;s/^[[:space:]]*//;s/[[:space:]]*$//')
-              
-              # Fallback to first version if only one exists
-              if [ -z "$version" ]; then
-                version=$(grep -m1 '<version>' "$module/pom.xml" | \
-                sed 's/<version>//;s/<\/version>//;s/^[[:space:]]*//;s/[[:space:]]*$//')
-              fi
-              RESULTS+=("{\"name\":\"io.github.coden256.$module\",\"version\":\"$version\"}")
+              version=$(grep -m1 '^    <version>' "$module/pom.xml" | sed 's/<version>//;s/<\/version>//;s/^[[:space:]]*//;s/[[:space:]]*$//')
+              RESULTS+=("{\"name\":\"$module\",\"version\":\"$version\"}")
             else
               echo "Warning: $module/pom.xml not found"
             fi
@@ -84,7 +77,7 @@ jobs:
           operation: deletePackageVersions
           user: ${{ github.repository_owner }}
           package_type: maven
-          package_name: ${{ matrix.name }}
+          package_name: io.github.coden256.${{ matrix.name }}
           include: name ${{ matrix.version }}
           summary: true
           debug: true
