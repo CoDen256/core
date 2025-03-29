@@ -10,8 +10,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <!-- Core libraries + utilities    -->
         <module>core-parent</module>
+        <!-- Core libraries + utilities    -->
+        <module>core-libraries-parent</module>
         <module>core-utils</module>
         <module>core-telegram</module>
         <module>core-database</module>
