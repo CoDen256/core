@@ -11,8 +11,35 @@ on:
     types: [created]
 
 jobs:
-  build:
 
+  fetch-versions:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.fetch.outputs.matrix }}
+    steps:
+      - id: fetch
+        run: |
+          # This could come from a file, API call, etc.
+          MATRIX_JSON='{"include":[{"name":"package1","version":"1.0.0"},{"name":"package2","version":"2.3.4"}]}'
+          echo "matrix=$MATRIX_JSON" >> $GITHUB_OUTPUT
+
+  clean:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      matrix:
+        item: ${{ fromJSON(needs.fetch-versions.outputs.matrix) }}
+    steps:
+      - name: Build package
+        run: |
+          echo "Building ${{ matrix.name }} version ${{ matrix.version }}"
+          # Your build commands here
+
+
+  build:
+    if: false
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -42,6 +69,6 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
       - name: Publish to GitHub Packages Apache Maven
-        run: mvn deploy -U -Prelease -DaltDeploymentRepository=github::https://maven.pkg.github.com/CoDen256/core -s $GITHUB_WORKSPACE/settings.xml
+        run: mvn deploy -U -DaltDeploymentRepository=github::https://maven.pkg.github.com/CoDen256/core -s $GITHUB_WORKSPACE/settings.xml
         env:
           GITHUB_TOKEN: ${{ github.token }}
