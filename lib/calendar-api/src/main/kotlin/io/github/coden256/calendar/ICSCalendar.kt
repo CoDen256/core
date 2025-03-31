@@ -1,6 +1,6 @@
-package io.github.coden256.absence
+package io.github.coden256.calendar
 
-import io.github.coden256.absence.api.Absence
+import io.github.coden256.calendar.api.Absence
 import net.fortuna.ical4j.data.CalendarBuilder
 import net.fortuna.ical4j.model.Calendar
 import net.fortuna.ical4j.model.component.VEvent
@@ -8,7 +8,7 @@ import java.io.InputStream
 import java.net.URI
 import java.time.ZonedDateTime
 
-class ICSCalendar(private val url: String) : io.github.coden256.absence.api.Calendar {
+class ICSCalendar(private val url: String) : io.github.coden256.calendar.api.Calendar {
     override fun absences(): List<Absence> {
         val calendar = fetchCalendar()
         return calendar

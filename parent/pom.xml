@@ -13,10 +13,12 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.code.style>official</kotlin.code.style>
+        <!--  The jvm version of the output classes will be this version  -->
         <kotlin.compiler.jvmTarget>17</kotlin.compiler.jvmTarget>
         <kotlin.version>1.9.23</kotlin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring-boot.version>3.3.5</spring-boot.version>
     </properties>
 
     <dependencies>
@@ -123,7 +125,7 @@
                 <!-- Import dependency management from Spring Boot BOM -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>3.3.5</version>
+                <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -164,11 +166,17 @@
         <sourceDirectory>src/main/kotlin</sourceDirectory>
         <testSourceDirectory>src/test/kotlin</testSourceDirectory>
         <plugins>
-            <!-- For target apps and libraries to compile -->
+            <!-- For target apps and libraries to compile (used instead of the maven-compiler-plugin for java) -->
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <version>${kotlin.version}</version>
+                <configuration>
+                    <args>
+                        <arg>-Xjsr305=strict</arg>
+                        <arg>-Xjdk-release=${kotlin.compiler.jvmTarget}</arg>
+                    </args>
+                </configuration>
                 <executions>
                     <execution>
                         <id>compile</id>
@@ -187,6 +195,7 @@
                 </executions>
                 <dependencies>
                     <dependency>
+                        <!--  Classes open by default  -->
                         <groupId>org.jetbrains.kotlin</groupId>
                         <artifactId>kotlin-maven-allopen</artifactId>
                         <version>${kotlin.version}</version>
@@ -221,7 +230,8 @@
                         </execution>
                     </executions>
                 </plugin>
-                <!-- For target apps to build an executable jar -->
+                <!-- For target non-spring apps to build an executable jar -->
+                <!-- Includes all dependencies inside, in comparison to just plain jar plugin  -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
@@ -248,12 +258,35 @@
                         </execution>
                     </executions>
                 </plugin>
+                <!-- For target spring apps to build an executable jar -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <configuration>
+                        <layers>
+                            <enabled>true</enabled>
+                        </layers>
+                    </configuration>
+                    <!--  This will attach to package phase and create a jar out of spring app automatically    -->
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
                 <!-- For target apps to push to docker hub -->
                 <plugin>
                     <groupId>com.google.cloud.tools</groupId>
                     <artifactId>jib-maven-plugin</artifactId>
                     <version>3.4.5</version>
                     <configuration>
+                        <from>
+                            <!-- Version of the docker image jre inside    -->
+                            <image>eclipse-temurin:${kotlin.compiler.jvmTarget}-jre</image>
+                        </from>
                         <to>
                             <image>coden256/${project.artifactId}</image>
                             <tags>

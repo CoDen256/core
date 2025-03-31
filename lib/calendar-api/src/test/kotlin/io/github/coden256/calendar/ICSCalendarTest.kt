@@ -1,4 +1,4 @@
-package io.github.coden256.absence
+package io.github.coden256.calendar
 
 import org.junit.jupiter.api.Test
 
