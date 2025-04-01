@@ -1,3 +1,5 @@
+package io.github.coden256.utils
+
 import java.math.RoundingMode
 
 fun Double.roundTo(n: Int, roundingMode: RoundingMode = RoundingMode.HALF_EVEN): Double {
