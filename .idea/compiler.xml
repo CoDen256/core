@@ -6,12 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="telegram" />
+        <module name="geoapify-api" />
         <module name="calendar-api" />
         <module name="database" />
         <module name="spring-utils" />
         <module name="utils" />
         <module name="nominatim-api" />
+        <module name="telegram" />
       </profile>
     </annotationProcessing>
   </component>

@@ -24,6 +24,7 @@
         <!-- SDKs and API connectors to the foreign services  -->
         <module>lib/calendar-api</module>
         <module>lib/nominatim-api</module>
+        <module>lib/geoapify-api</module>
 
     </modules>
 </project>

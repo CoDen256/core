@@ -2,3 +2,5 @@
 /core-utils/target/
 /**/target/
 .idea/workspace.xml
+
+.attach_pid*
