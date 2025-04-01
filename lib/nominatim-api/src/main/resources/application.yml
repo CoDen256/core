@@ -1,0 +1,9 @@
+api.nominatim:
+  host: https://nominatim.openstreetmap.org
+  headers:
+    "User-Agent": "CoDen256-test"
+  limit:
+    name: "nominatim"
+    requests: 1
+    every: PT1S
+    timeout: PT60S

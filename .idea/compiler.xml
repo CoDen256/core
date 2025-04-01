@@ -11,6 +11,7 @@
         <module name="database" />
         <module name="spring-utils" />
         <module name="utils" />
+        <module name="nominatim-api" />
       </profile>
     </annotationProcessing>
   </component>

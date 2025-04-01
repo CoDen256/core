@@ -16,6 +16,9 @@
     <artifactId>lib-spring-parent</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
+    <modules>
+        <module>../nominatim-api</module>
+    </modules>
 
     <build>
         <plugins>

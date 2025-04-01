@@ -10,13 +10,13 @@
         <relativePath>../lib-spring-parent</relativePath>
     </parent>
 
-    <artifactId>spring-utils</artifactId>
-    <version>1.0</version>
+    <artifactId>nominatim-api</artifactId>
+    <version>0.0</version>
 
     <dependencies>
         <dependency>
             <groupId>io.github.coden256.lib</groupId>
-            <artifactId>utils</artifactId>
+            <artifactId>spring-utils</artifactId>
         </dependency>
     </dependencies>
 
