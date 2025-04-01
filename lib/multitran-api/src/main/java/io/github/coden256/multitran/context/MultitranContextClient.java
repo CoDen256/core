@@ -1,6 +1,6 @@
-package coden.multitran.context;
+package io.github.coden256.multitran.context;
 
-import coden.multitran.language.MultitranLanguage;
+import io.github.coden256.multitran.language.MultitranLanguage;
 
 import java.util.stream.Stream;
 

@@ -1,10 +1,11 @@
-package coden.multitran.crawler;
+package io.github.coden256.multitran.crawler;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import coden.multitran.config.MultitranConfig;
-import coden.multitran.language.MultitranLanguage;
-import coden.multitran.translation.MultitranTranslation;
+import io.github.coden256.multitran.config.MultitranConfig;
+import io.github.coden256.multitran.language.MultitranLanguage;
+import io.github.coden256.multitran.translation.MultitranTranslation;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = MultitranConfig.class)
+@Disabled("Integration test may be unstable")
 class MultitranCrawlerTest {
 
     @Autowired

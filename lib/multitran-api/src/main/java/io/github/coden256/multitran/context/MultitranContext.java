@@ -1,4 +1,4 @@
-package coden.multitran.context;
+package io.github.coden256.multitran.context;
 
 /**
  * Represents a data class for the context fetched from the multitran.com

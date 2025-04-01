@@ -1,4 +1,4 @@
-package coden.multitran.language;
+package io.github.coden256.multitran.language;
 
 /**
  * The {@link MultitranLanguage} contains all possible supported

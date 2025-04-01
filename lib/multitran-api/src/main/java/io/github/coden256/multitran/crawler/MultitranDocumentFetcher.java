@@ -1,6 +1,6 @@
-package coden.multitran.crawler;
+package io.github.coden256.multitran.crawler;
 
-import coden.multitran.language.MultitranLanguage;
+import io.github.coden256.multitran.language.MultitranLanguage;
 import org.jsoup.nodes.Document;
 
 /**

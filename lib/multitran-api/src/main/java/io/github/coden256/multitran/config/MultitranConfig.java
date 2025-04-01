@@ -1,9 +1,9 @@
-package coden.multitran.config;
+package io.github.coden256.multitran.config;
 
-import coden.multitran.crawler.MultitranCrawler;
-import coden.multitran.crawler.MultitranDocumentFetcher;
-import coden.multitran.translation.MultitranTranslationClient;
-import coden.multitran.website.MultitranUrls;
+import io.github.coden256.multitran.crawler.MultitranCrawler;
+import io.github.coden256.multitran.crawler.MultitranDocumentFetcher;
+import io.github.coden256.multitran.translation.MultitranTranslationClient;
+import io.github.coden256.multitran.website.MultitranUrls;
 import org.jsoup.Jsoup;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package coden.multitran.context;
+package io.github.coden256.multitran.context;
 
 /**
  * The context sentence containing the requested phrase.

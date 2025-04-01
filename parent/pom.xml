@@ -109,6 +109,11 @@
                 <artifactId>reverso-api</artifactId>
                 <version>0.0</version>
             </dependency>
+            <dependency>
+                <groupId>io.github.coden256.lib</groupId>
+                <artifactId>multitran-api</artifactId>
+                <version>0.0</version>
+            </dependency>
 
             <!-- Kotlin dependencies -->
             <dependency>

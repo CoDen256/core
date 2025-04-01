@@ -1,4 +1,4 @@
-package coden.multitran.translation;
+package io.github.coden256.multitran.translation;
 
 /**
  * Represents a translation parsed from multitran.com

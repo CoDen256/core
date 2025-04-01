@@ -1,8 +1,8 @@
-package coden.multitran.crawler;
+package io.github.coden256.multitran.crawler;
 
-import coden.multitran.language.MultitranLanguage;
-import coden.multitran.translation.MultitranTranslation;
-import coden.multitran.translation.MultitranTranslationClient;
+import io.github.coden256.multitran.language.MultitranLanguage;
+import io.github.coden256.multitran.translation.MultitranTranslation;
+import io.github.coden256.multitran.translation.MultitranTranslationClient;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;

@@ -1,6 +1,6 @@
-package coden.multitran.website;
+package io.github.coden256.multitran.website;
 
-import coden.multitran.language.MultitranLanguage;
+import io.github.coden256.multitran.language.MultitranLanguage;
 import org.apache.commons.text.StringSubstitutor;
 
 import java.util.Map;

@@ -1,7 +1,7 @@
-package coden.multitran;
+package io.github.coden256.multitran;
 
-import coden.multitran.context.MultitranContextClient;
-import coden.multitran.translation.MultitranTranslationClient;
+import io.github.coden256.multitran.context.MultitranContextClient;
+import io.github.coden256.multitran.translation.MultitranTranslationClient;
 
 /**
  * Represents general client to fetch all kinds of information from the multitran.com

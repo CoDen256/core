@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=coden.multitran.config.MultitranConfig
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=io.github.coden256.multitran.config.MultitranConfig
