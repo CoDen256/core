@@ -19,6 +19,7 @@
         <module>lib/utils</module>
         <module>lib/telegram</module>
         <module>lib/database</module>
+        <module>lib/spring-utils</module>
 
         <!-- SDKs and API connectors to the foreign services  -->
         <module>lib/calendar-api</module>

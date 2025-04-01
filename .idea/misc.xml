@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
@@ -12,6 +13,7 @@
         <option value="$PROJECT_DIR$/lib/parent/pom.xml" />
         <option value="$PROJECT_DIR$/lib/calendar-api/pom.xml" />
         <option value="$PROJECT_DIR$/lib/database/pom.xml" />
+        <option value="$PROJECT_DIR$/lib/spring-utils/pom.xml" />
       </list>
     </option>
   </component>
