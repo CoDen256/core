@@ -4,3 +4,5 @@
 .idea/workspace.xml
 
 .attach_pid*
+/**/src/main/resources/application.yaml
+/**/src/main/resources/application.yml

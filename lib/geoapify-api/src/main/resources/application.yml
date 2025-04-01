@@ -1,8 +1,0 @@
-api.geoapify:
-  host: https://api.geoapify.com
-  api-token: <token>
-  limit:
-    name: "geo"
-    requests: 1
-    every: PT1S
-    timeout: PT60S

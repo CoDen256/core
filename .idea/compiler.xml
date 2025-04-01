@@ -6,7 +6,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="geoapify-api" />
         <module name="reverso-api" />
         <module name="calendar-api" />
         <module name="database" />
@@ -17,6 +16,9 @@
         <module name="telegram" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="geoapify-api" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
