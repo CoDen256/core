@@ -97,12 +97,12 @@
             <dependency>
                 <groupId>io.github.coden256.lib</groupId>
                 <artifactId>nominatim-api</artifactId>
-                <version>0.0</version>
+                <version>1.0</version>
             </dependency>
             <dependency>
                 <groupId>io.github.coden256.lib</groupId>
                 <artifactId>geoapify-api</artifactId>
-                <version>0.0</version>
+                <version>1.0</version>
             </dependency>
 
             <!-- Kotlin dependencies -->
