@@ -25,8 +25,8 @@
         <module>lib/multitran-api</module>
         <module>lib/reverso-api</module>
         <module>lib/calendar-api</module>
-        <module>lib/nominatim-api</module>
         <module>lib/geoapify-api</module>
+        <module>lib/nominatim-api</module>
 
     </modules>
 </project>
