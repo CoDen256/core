@@ -1,5 +1,4 @@
 /core-telegram/target/
 /core-utils/target/
 /**/target/
-.idea
-!**/src/test/**/target/
+.idea/workspace.xml

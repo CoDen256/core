@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/distribution-parent/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/distribution-parent/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lib/calendar-api/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lib/calendar-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lib/database/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lib/database/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lib/lib-parent/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lib/lib-parent/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lib/lib-spring-parent/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lib/lib-spring-parent/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lib/telegram/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lib/telegram/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lib/utils/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lib/utils/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/parent/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/parent/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-parent/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-parent/src/main/kotlin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-parent/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/utils/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/utils/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
