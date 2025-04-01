@@ -104,6 +104,11 @@
                 <artifactId>geoapify-api</artifactId>
                 <version>1.0</version>
             </dependency>
+            <dependency>
+                <groupId>io.github.coden256.lib</groupId>
+                <artifactId>reverso-api</artifactId>
+                <version>0.0</version>
+            </dependency>
 
             <!-- Kotlin dependencies -->
             <dependency>
@@ -113,6 +118,11 @@
             </dependency>
 
             <!-- Utility dependencies  -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-text</artifactId>
+                <version>1.12.0</version>
+            </dependency>
             <dependency>
                 <groupId>com.sksamuel.hoplite</groupId>
                 <artifactId>hoplite-yaml</artifactId>

@@ -17,7 +17,7 @@ class GeoapifyIntegrationTest {
 
 
     @Test
-    fun getStreetDetails() {
+    fun getReachability() {
         val details = geoapify.getReachability(ReachabilityRequest(51.3633503444741, 12.362456547050638, 5.minutes))
 
         assertTrue(details.block()!!.places.size > 5)

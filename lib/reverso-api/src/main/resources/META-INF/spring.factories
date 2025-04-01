@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=coden.reverso.config.ReversoConfig
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=io.github.coden256.reverso.config.ReversoConfig
