@@ -92,7 +92,7 @@
             <dependency>
                 <groupId>io.github.coden256.lib</groupId>
                 <artifactId>spring-utils</artifactId>
-                <version>1.0</version>
+                <version>1.1</version>
             </dependency>
             <dependency>
                 <groupId>io.github.coden256.lib</groupId>

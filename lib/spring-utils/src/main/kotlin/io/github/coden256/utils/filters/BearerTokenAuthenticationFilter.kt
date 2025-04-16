@@ -19,7 +19,7 @@ class BearerTokenAuthenticationFilter(private val tokenProvider: TokenProvider):
             .getToken()
             .doOnNext {
                 token.set(it)
-                logger.info { "${tokenProvider.javaClass.simpleName} Got token $it" }
+                logger.info { "[${tokenProvider.javaClass.simpleName}] Got token $it" }
             }
     }
 
@@ -34,9 +34,8 @@ class BearerTokenAuthenticationFilter(private val tokenProvider: TokenProvider):
                 .flatMap { response ->
                     // If response is 401, retry with a new token
                     if (isUnauthorized(response)) {
-                        logger.info { "Unauthorized! Requesting new token"  }
-                        requestNewToken()
-                            .flatMap { token -> next.exchange(request.withToken(token)) }
+                        logger.info { "[${tokenProvider.javaClass.simpleName}] Unauthorized! Requesting new token"  }
+                        requestNewToken().flatMap { token -> next.exchange(request.withToken(token)) }
                     } else {
                         Mono.just(response)
                     }
